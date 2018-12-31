@@ -9,9 +9,14 @@
   },
   "dependencies": {
     "@hydrofoil/hydrofoil-shell": "https://github.com/hypermedia-app/hydrofoil-shell",
+    "@lit-any/lit-any": "^0.7.0",
     "@polymer/lit-element": "^0.6.5",
     "@polymer/polymer": "^3.0.0",
-    "rdf-store-ldp": "^0.3.1"
+    "lit-html": "^1.0.0-rc.1",
+    "rdf-ext": "1.1",
+    "rdf-fetch-lite": "^1.1.2",
+    "rdf-store-web": "^1.0.0",
+    "uduvudu": "https://github.com/hypermedia-app/uduvudu#lit-uduvudu"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

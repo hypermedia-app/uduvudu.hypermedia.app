@@ -1,6 +1,15 @@
 import { HydrofoilShellBase } from '@hydrofoil/hydrofoil-shell/hydrofoil-shell-base'
 import {html} from '@polymer/lit-element'
-import LdpStore from 'rdf-store-ldp'
+import * as rdf from 'rdf-ext'
+import rdfFetch from 'rdf-fetch-lite'
+const N3Parser = require('rdf-parser-n3')
+import './views'
+
+let formats = {
+  parsers: new rdf.Parsers({
+    'text/turtle': N3Parser
+  })
+}
 
 export default class UduvuduShell extends HydrofoilShellBase {
   get query () {
@@ -10,7 +19,13 @@ export default class UduvuduShell extends HydrofoilShellBase {
   async loadResourceInternal (source) {
     const query = 'http://dbpedia.org/sparql?query=' + encodeURIComponent(this.getQuery(source)) + '&format=' + encodeURIComponent('text/turtle')
 
-    return await graphPromise(query)
+    const graph = await graphPromise(query)
+
+    return {
+      graph,
+      resource: source,
+      language: 'en'
+    }
   }
 
   getQuery (url) {
@@ -57,10 +72,12 @@ export default class UduvuduShell extends HydrofoilShellBase {
   }
 
   renderContent() {
-    return super.renderMain()
+    return html`<lit-view .value="${this.model}" template-scope="hydrofoil-shell"></lit-view>`
   }
 
   renderError() {
+    console.error(this.lastError)
+
     return html`<div class="alert alert-danger">
                   <button type="button" class="close" data-dismiss="alert">&times;</button>
                   <strong>Error:</strong> ${this.lastError}.
@@ -69,14 +86,7 @@ export default class UduvuduShell extends HydrofoilShellBase {
 }
 
 function graphPromise(query) {
-  const store = new LdpStore()
-
-  return new Promise((resolve, reject) => {
-    store.graph(query, function (error, graph) {
-      if (error) reject(error)
-      else resolve(graph)
-    })
-  })
+  return rdfFetch(query, { formats }).then(res => res.dataset())
 }
 
 customElements.define('uduvudu-shell', UduvuduShell)
