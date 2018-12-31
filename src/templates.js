@@ -1,18 +1,20 @@
-// <!--
-// # Visualizer Tempaltes
-// -->
-// <script id="title" type="text/uduvudu-template">
-//   <h1><%-title.u%></h1>
-//   </script>
-//
+import {html} from 'lit-html'
+
+/*
+ Visualizer Templates
+*/
+
+export const title =
+  (title) => html`<h1>${title.u}</h1>`
+
 //   <script id="mtitle" type="text/uduvudu-template">
 //   <h1><%-mtitle.title.u%></h1>
 //   </script>
 //
-//   <script id="text" type="text/uduvudu-template">
-//   <p><%-text.u%></p>
-//   </script>
-//
+
+export const text = (text) =>
+  html`<p>${text.u}</p>`
+
 //   <script id="neighboringMunicipality" type="text/uduvudu-template">
 //   <div style="width: 235px; float: left;">
 //   <h4>Neighboring municipalities</h4>
@@ -67,20 +69,19 @@
 //   </div>
 //   </script>
 //
-//   <script id="community" type="text/uduvudu-template">
-//   <div style="max-height: 300px; width: 560px; background-color: lightgrey; padding: 4px; float: left; overflow-y: scroll;">
-//   <div style=" width: 235px; overflow: hidden; margin: -4px; text-align: right;" class="pull-right">
-//   <img style="max-height: 300px; max-width: 235px; margin-bottom: 10px; margin-left: 10px;" src="<%-community.img_url.u%>" />
-// </div>
-// <%=template(community.label_comment)%>
-//   </div>
-//   </script>
-//
-//   <script id="label_comment" type="text/uduvudu-template">
-// <%=template(label_comment.title)%>
-// <%=template(label_comment.text)%>
-//   </script>
-//
+export const community = (community, template) =>
+  html`<div style="max-height: 300px; width: 560px; background-color: lightgrey; padding: 4px; float: left; overflow-y: scroll;">
+  <div style=" width: 235px; overflow: hidden; margin: -4px; text-align: right;" class="pull-right">
+  <img style="max-height: 300px; max-width: 235px; margin-bottom: 10px; margin-left: 10px;" src="${community.img_url.u}" />
+</div>
+${template(community.label_comment)}
+  </div>
+  </script>`
+
+export const label_comment = (label_comment, template) =>
+  html`${template(label_comment.title)}
+       ${template(label_comment.text)}`
+
 //   <script id="community_stat" type="text/x-handlebars-template">
 // <%=template(community_stat.website)%>
 // <%=template(community_stat.elevation)%>

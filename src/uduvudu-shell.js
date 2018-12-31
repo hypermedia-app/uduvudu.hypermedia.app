@@ -12,6 +12,20 @@ let formats = {
 }
 
 export default class UduvuduShell extends HydrofoilShellBase {
+  constructor() {
+    super()
+
+    this.language = navigator.language.substring(0,2) || "en"
+    this.model = []
+    this.lastError = {}
+  }
+
+  static get properties() {
+    return Object.assign(HydrofoilShellBase.properties, {
+      language: { type: String }
+    })
+  }
+
   get query () {
     return this.getQuery(this.url)
   }
@@ -21,11 +35,7 @@ export default class UduvuduShell extends HydrofoilShellBase {
 
     const graph = await graphPromise(query)
 
-    return {
-      graph,
-      resource: source,
-      language: 'en'
-    }
+    return await doMatching(graph, source)
   }
 
   getQuery (url) {
@@ -45,48 +55,50 @@ export default class UduvuduShell extends HydrofoilShellBase {
   }
 
   renderMain() {
-    const content = () => {
-      switch (this.state) {
-        case 'error':
-          return this.renderError()
-        default:
-          if (this.isLoading) {
-            return this.renderLoader()
-          } else {
-            return this.renderContent()
-          }
-      }
-    }
-
     return html`<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    ${content()}`
+    <style>
+        [hidden] { display: none }
+    </style>
+
+    ${this.renderLoader()}
+    ${this.renderContent()}
+    ${this.renderError()}`
   }
 
   renderLoader() {
-    return html`<div class="alert alert-info">
+    return html`<div class="alert alert-info" ?hidden="${this.state !== 'loading'}">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <strong>Loading</strong> ${this.url} is being loaded ...
             </div>`
   }
 
   renderContent() {
-    return html`<lit-view .value="${this.model}" template-scope="hydrofoil-shell"></lit-view>`
+    const model = this.model.map(m => uduvudu.helper.prepareLanguage(m, this.language))
+
+    return html`<lit-view .value="${model}" template-scope="hydrofoil-shell" ?hidden="${this.isLoading || this.state === 'error'}"></lit-view>`
   }
 
   renderError() {
-    console.error(this.lastError)
-
-    return html`<div class="alert alert-danger">
+    return html`<div class="alert alert-danger" ?hidden="${this.state !== 'error'}">
                   <button type="button" class="close" data-dismiss="alert">&times;</button>
-                  <strong>Error:</strong> ${this.lastError}.
+                  <strong>Error:</strong> ${this.lastError.message} <br> ${this.lastError.stack}.
                 </div>`
   }
 }
 
 function graphPromise(query) {
   return rdfFetch(query, { formats }).then(res => res.dataset())
+}
+
+async function doMatching(graph, resource) {
+  const uduvudu = await import('uduvudu')
+  const matchers = await import('./matcher')
+
+  uduvudu.initialize(matchers)
+
+  return uduvudu.matcher(graph, resource, 0)
 }
 
 customElements.define('uduvudu-shell', UduvuduShell)
