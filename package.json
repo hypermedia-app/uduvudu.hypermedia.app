@@ -1,0 +1,12 @@
+{
+  "name": "lit-uduvudu",
+  "scripts": {
+    "start": "polymer serve"
+  },
+  "dependencies": {
+    "@polymer/polymer": "^3.0.0"
+  },
+  "devDependencies": {
+    "@webcomponents/webcomponentsjs": "^2.0.0"
+  }
+}
