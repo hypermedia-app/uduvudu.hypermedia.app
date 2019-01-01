@@ -34,8 +34,9 @@ export default class UduvuduShell extends HydrofoilShellBase {
     const query = 'http://dbpedia.org/sparql?query=' + encodeURIComponent(this.getQuery(source)) + '&format=' + encodeURIComponent('text/turtle')
 
     const graph = await graphPromise(query)
+    const matchingResult =  await doMatching(graph, source)
 
-    return await doMatching(graph, source)
+    return matchingResult.sort((a, b) => b.order - a.order)
   }
 
   getQuery (url) {
@@ -76,7 +77,7 @@ export default class UduvuduShell extends HydrofoilShellBase {
   renderContent() {
     const model = this.model.map(m => uduvudu.helper.prepareLanguage(m, this.language))
 
-    return html`<lit-view .value="${model}" template-scope="hydrofoil-shell" ?hidden="${this.isLoading || this.state === 'error'}"></lit-view>`
+    return html`<lit-view .value="${model}" template-scope="hydrofoil-shell" ?hidden="${this.state !== 'loaded'}"></lit-view>`
   }
 
   renderError() {
