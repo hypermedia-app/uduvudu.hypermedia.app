@@ -67,7 +67,7 @@ export default class UduvuduShell extends HydrofoilShellBase {
   }
 
   renderLoader() {
-    return html`<div class="alert alert-info" ?hidden="${this.state !== 'loading'}">
+    return html`<div class="alert alert-info" ?hidden="${!this.isLoading && this.state !== 'error'}">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <strong>Loading</strong> ${this.url} is being loaded ...
             </div>`

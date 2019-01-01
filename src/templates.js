@@ -106,7 +106,11 @@ export const website = (website) => html`
   </div>`
 
 export const tempC = (tempC) => {
-  import('@granite-elements/granite-c3/granite-c3')
+  window['xtal_chart_istic'] = {
+    href: '/node_modules/xtal-chart-istic/chartist.js'
+  }
+
+  import('xtal-chart-istic/xtal-chart-istic')
 
   const months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec']
 
@@ -115,23 +119,30 @@ export const tempC = (tempC) => {
   }
 
   const chartData = {
-    columns: [
-      [ 'Average Low', ...getSeries(tempC.lowC) ],
-      [ 'Daily Mean', ...getSeries(tempC.meanC) ],
-      [ 'Average High', ...getSeries(tempC.highC) ]
-    ]
+    data: {
+      labels: ['Average Low', 'Daily Mean', 'Average High'],
+      series: [
+        getSeries(tempC.lowC),
+        getSeries(tempC.meanC),
+        getSeries(tempC.highC)
+      ]
+    }
   }
 
   return html`
   <div>
     <br>
     <h3>Temperatures per Month</h3>
-    <granite-c3 .data="${chartData}"></granite-c3>
+    <xtal-chart-istic draw .lineChart=${chartData}></xtal-chart-istic>
   </div>`
 }
 
 export const humidity = (humi) => {
-  import('@granite-elements/granite-c3/granite-c3')
+  window['xtal_chart_istic'] = {
+    href: '/node_modules/xtal-chart-istic/chartist.js'
+  }
+
+  import('xtal-chart-istic/xtal-chart-istic')
 
   const months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec']
   const getSeries = (data) => {
@@ -139,16 +150,19 @@ export const humidity = (humi) => {
   }
 
   const chartData = {
-    columns: [
-      [ 'Humidity in %/month', ...getSeries(humi) ]
-    ]
+    data: {
+      labels: ['Humidity in %/month'],
+      series: [
+        getSeries(humi)
+      ]
+    }
   }
 
   return html`
   <div>
     <br>
     <h3>Humidity per Month</h3>
-    <granite-c3 .data="${chartData}"></granite-c3>
+    <xtal-chart-istic draw .lineChart=${chartData}></xtal-chart-istic>
   </div>`
 }
 
@@ -156,7 +170,7 @@ export const location = (location) => {
   import('./google-map')
 
   return html`
-   <div style="height: 250px; width: 560px; float: left;">
+   <div style="height: 250px; width: 560px; float: left; margin-bottom: 15px">
      <big>&#8982;</big> ${location.lat.u} / ${location.long.u}
      
      <google-map latitude="${location.lat.u}" longitude="${location.long.u}" key="AIzaSyAFRTcPPyYit9ERj9COlgpgYW-Ve-lUeUs"></google-map>

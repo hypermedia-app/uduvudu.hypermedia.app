@@ -35,16 +35,8 @@ export default class GoogleMap extends LitElement {
     }).catch(console.error)
   }
 
-  updated(props) {
-    super.updated(props)
-
-    if((props.has('longitude') || props.has('latitude')) && this.map) {
-      debugger
-    }
-  }
-
   render () {
-    return html`<div id="map" style="height: 100%"></div>`
+    return html`<div id="map" style="height: 95%"></div>`
   }
 }
 

@@ -8,7 +8,6 @@
     "dev": "webpack-dev-server --hot --inline"
   },
   "dependencies": {
-    "@granite-elements/granite-c3": "^3.2.0",
     "@hydrofoil/hydrofoil-shell": "https://github.com/hypermedia-app/hydrofoil-shell",
     "@lit-any/lit-any": "^0.7.0",
     "@polymer/lit-element": "^0.6.5",
@@ -20,7 +19,8 @@
     "rdf-ext": "1.1",
     "rdf-fetch-lite": "^1.1.2",
     "rdf-store-web": "^1.0.0",
-    "uduvudu": "https://github.com/hypermedia-app/uduvudu#lit-uduvudu"
+    "uduvudu": "https://github.com/hypermedia-app/uduvudu#lit-uduvudu",
+    "xtal-chart-istic": "^0.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
