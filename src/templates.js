@@ -233,7 +233,18 @@ literals.constraint = (value) => value.length > 0
 export const _void = () => html``
 
 // unknown
-export const unknown = (unknown) =>
-  html`<div style=" width: 140px; height: 140px; float: left; overflow: hidden;">
-         <small><p>${unknown.subject.u}<br />&#9608;<br />${unknown.predicate.u}<br />&#9608;<br />${unknown.object.u}</p></small>
+export const unknown = (unknown) => {
+  return html`<div style=" width: 140px; height: 140px; float: left; overflow: hidden;">
+         <small>
+            <p>
+                <ld-link resource-url="${unknown.subject.u}"><a>${unknown.s.u}</a></ld-link>
+                <br />&#9608;
+                <br />
+                <ld-link resource-url="${unknown.predicate.u}"><a>${unknown.p.u}</a></ld-link>
+                <br />&#9608;
+                <br />
+                <ld-link resource-url="${unknown.object.u}"><a>${unknown.o.u}</a></ld-link>
+            </p>
+         </small>
        </div>`
+}
