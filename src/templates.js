@@ -130,33 +130,27 @@ export const tempC = (tempC) => {
   </div>`
 }
 
-export const humidity = (humidity) => html`
-<div style="float: left">
-  <br>
-  <h3>Humidity per Month</h3>
-  <canvas id="cvs_humidity" width="560px" height="200px"></canvas>
-  <p>Humidity in %/month</p>
-</div>`
+export const humidity = (humi) => {
+  import('@granite-elements/granite-c3/granite-c3')
 
-//export const humidity_js = (humidity_js) =>
-// var script = document.createElement("script");
-// script.type = "text/javascript";
-// script.src = "http://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js";
-// script.onload = function(){
-//   var ctx = document.getElementById("cvs_humidity").getContext("2d");
-//   var data = {
-//     labels : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
-//     datasets : [
-//       {
-//         fillColor : "rgba(120,220,120,0.5)",
-//         strokeColor : "rgba(220,220,220,1)",
-//         data : [${humi.jan.u, humi.feb.u, humi.mar.u, humi.apr.u, humi.may.u, humi.jun.u, humi.jul.u, humi.aug.u, humi.sep.u, humi.oct.u, humi.nov.u, humi.dec.u}]
-// }
-// ]
-// }
-//   new Chart(ctx).Bar(data, {scaleOverride: true,scaleSteps: 10, scaleStepWidth: 10, scaleBeginAtZero : true});
-// };
-// document.body.appendChild(script);
+  const months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec']
+  const getSeries = (data) => {
+    return months.map(month => Number.parseFloat(data[month].u))
+  }
+
+  const chartData = {
+    columns: [
+      [ 'Humidity in %/month', ...getSeries(humi) ]
+    ]
+  }
+
+  return html`
+  <div>
+    <br>
+    <h3>Humidity per Month</h3>
+    <granite-c3 .data="${chartData}"></granite-c3>
+  </div>`
+}
 
 export const location = (location) => html`
  <div id="map-canvas" style="height: 250px; width: 560px; float: left;">
