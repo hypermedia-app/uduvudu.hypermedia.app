@@ -25,10 +25,17 @@ function renderSubTemplate(render) {
 }
 
 Object.keys(templates).forEach((templateName) => {
-  ViewTemplates.default.when
+  const templateDefinition = templates[templateName]
+
+  let view = ViewTemplates.default.when
     .scopeMatches(templateName.replace(/^_/, ''))
-    .renders((r, v) => {
-      return templates[templateName](v, renderSubTemplate(r))
+
+  if (templateDefinition.constraint) {
+    view = view.valueMatches(templateDefinition.constraint)
+  }
+
+  view.renders((r, v) => {
+      return templateDefinition(v, renderSubTemplate(r))
     })
 })
 

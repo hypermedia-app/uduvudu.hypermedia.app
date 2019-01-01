@@ -1,5 +1,6 @@
 import {html} from 'lit-html'
 import {repeat} from 'lit-html/directives/repeat'
+import {until} from 'lit-html/directives/until'
 
 import 'ld-navigation/ld-link'
 
@@ -198,30 +199,26 @@ export const img = (img) =>
        </div>`
 
 // container for literals
-export const literals = (literals, template) => html`
-  <div style="clear: both;">
-    <button class="btn btn-default col-md-12 btn-sm" type="button" data-toggle="collapse" data-target="#literalsCollapse" aria-expanded="false" aria-controls="literalsCollapse">
-    Show remaining literals
-  </button>
-  <br>
-  <div class="collapse" id="literalsCollapse">
-    ${repeat(literals, (e) => template(e.literal))}
-  </div>
-  <br>
-  </div>`
+export const literals = (literals, template) => {
+  const contentsReady = import('paper-collapse-item/paper-collapse-item')
+    .then(() => repeat(literals, (e) => template(e.literal)))
+
+  return html`
+     <paper-collapse-item header="Remaining literals" style="clear: both; display: block">
+        ${until(contentsReady, '')}
+     </paper-collapse-item>`
+}
 
 // container for unknowns
-export const unknowns = (unknowns, template) => html`
-  <div style="clear: both;">
-    <button class="btn btn-default col-md-12 btn-sm" type="button" data-toggle="collapse" data-target="#unknownsCollapse" aria-expanded="false" aria-controls="unknownsCollapse">
-    Show remaining links
-  </button>
-  <br>
-  <div class="collapse" id="unknownsCollapse">
-      ${repeat(unknowns, (e) => template(e.unknown))}
-  </div>
-  <br><br><br>
-  </div>`
+export const unknowns = (unknowns, template) => {
+  const contentsReady = import('paper-collapse-item/paper-collapse-item')
+    .then(() => repeat(unknowns, (e) => template(e.unknown)))
+
+  return html`
+     <paper-collapse-item header="Remaining links" style="clear: both; display: block">
+        ${until(contentsReady, '')}
+     </paper-collapse-item>`
+}
 
 // <!-- literal -->
 export const literal = (literal) =>
@@ -230,7 +227,7 @@ export const literal = (literal) =>
                 <b>${literal.name.u}</b>:<br /> ${literal.text.u}
             </p>
         </div>`
-
+literals.constraint = (value) => value.length > 0
 
 // <!-- void -->
 export const _void = () => html``
