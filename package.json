@@ -11,6 +11,7 @@
     "@hydrofoil/hydrofoil-shell": "https://github.com/hypermedia-app/hydrofoil-shell",
     "@lit-any/lit-any": "^0.7.0",
     "@polymer/lit-element": "^0.6.5",
+    "@polymer/paper-toast": "^3.0.1",
     "@polymer/polymer": "^3.0.0",
     "ld-navigation": "^0.5.0-a1",
     "lit-html": "^1.0.0-rc.1",

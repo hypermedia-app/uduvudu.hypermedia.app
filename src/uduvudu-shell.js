@@ -2,6 +2,8 @@ import { HydrofoilShellBase } from '@hydrofoil/hydrofoil-shell/hydrofoil-shell-b
 import {html} from '@polymer/lit-element'
 import './views'
 
+import '@polymer/paper-toast/paper-toast'
+
 export default class UduvuduShell extends HydrofoilShellBase {
   constructor() {
     super()
@@ -71,6 +73,10 @@ export default class UduvuduShell extends HydrofoilShellBase {
 
     <style>
         [hidden] { display: none }
+        
+        paper-toast {
+            margin: 0;
+        }
     </style>
 
     ${this.renderLoader()}
@@ -79,10 +85,9 @@ export default class UduvuduShell extends HydrofoilShellBase {
   }
 
   renderLoader() {
-    return html`<div class="alert alert-info" ?hidden="${!this.isLoading && this.state !== 'error'}">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>Loading</strong> ${this.url} is being loaded ...
-            </div>`
+    return html`<paper-toast vertical-align="top" duration="0" ?opened="${this.isLoading && this.state !== 'error'}" .fitInto="${this}">
+<strong>Loading</strong> ${this.url} is being loaded ...
+</paper-toast>`
   }
 
   renderContent() {
@@ -92,10 +97,9 @@ export default class UduvuduShell extends HydrofoilShellBase {
   }
 
   renderError() {
-    return html`<div class="alert alert-danger" ?hidden="${this.state !== 'error'}">
-                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+    return html`<paper-toast vertical-align="top" duration="0" ?opened="${this.state === 'error'}" .fitInto="${this}">
                   <strong>Error:</strong> ${this.lastError.message} <br> ${this.lastError.stack}.
-                </div>`
+                </paper-toast>`
   }
 }
 
