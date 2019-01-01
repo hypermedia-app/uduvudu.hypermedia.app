@@ -5985,7 +5985,7 @@ typedarray@^0.0.6:
 
 "uduvudu@https://github.com/hypermedia-app/uduvudu#lit-uduvudu":
   version "0.7.0"
-  resolved "https://github.com/hypermedia-app/uduvudu#49e71a27cf695f2b43b2523a3e06a966dd93f805"
+  resolved "https://github.com/hypermedia-app/uduvudu#91ce54d13b28074bfae54d6ed5892215937fe152"
   dependencies:
     rdf-ext "^1.1.0"
     underscore "^1.9.1"

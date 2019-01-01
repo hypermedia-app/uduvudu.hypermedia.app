@@ -1,6 +1,5 @@
 import ViewTemplates from '@lit-any/lit-any/views'
 import {html} from 'lit-html'
-import {until} from 'lit-html/directives/until'
 import {repeat} from 'lit-html/directives/repeat'
 import * as templates from './templates'
 
@@ -12,7 +11,7 @@ ViewTemplates.default.when
         const scope = Object.keys(m.context)[0]
         const value = m.context[scope]
 
-        return html`<div>${r(value, scope)}</div>`
+        return html`${r(value, scope)}`
       })}`
     }
 
@@ -25,16 +24,9 @@ function renderSubTemplate(render) {
   return (context) => render(context, context.t.name)
 }
 
-ViewTemplates.default.when
-  .scopeMatches('uduvudu')
-  .valueMatches(context => context && context.t && context.t.name)
-  .renders((r, context) => {
-    return r(context, context.t.name)
-  })
-
 Object.keys(templates).forEach((templateName) => {
   ViewTemplates.default.when
-    .scopeMatches(templateName)
+    .scopeMatches(templateName.replace(/^_/, ''))
     .renders((r, v) => {
       return templates[templateName](v, renderSubTemplate(r))
     })
