@@ -130,7 +130,7 @@ export const tempC = (tempC) => {
   }
 
   return html`
-  <div>
+  <div style="float: left; width:100%">
     <br>
     <h3>Temperatures per Month</h3>
     <xtal-chart-istic draw .lineChart=${chartData}></xtal-chart-istic>
@@ -159,7 +159,7 @@ export const humidity = (humi) => {
   }
 
   return html`
-  <div>
+  <div style="float: left; width:100%">
     <br>
     <h3>Humidity per Month</h3>
     <xtal-chart-istic draw .lineChart=${chartData}></xtal-chart-istic>
