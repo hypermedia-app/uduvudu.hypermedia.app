@@ -1,15 +1,6 @@
 import { HydrofoilShellBase } from '@hydrofoil/hydrofoil-shell/hydrofoil-shell-base'
 import {html} from '@polymer/lit-element'
-import * as rdf from 'rdf-ext'
-import rdfFetch from 'rdf-fetch-lite'
-const N3Parser = require('rdf-parser-n3')
 import './views'
-
-let formats = {
-  parsers: new rdf.Parsers({
-    'text/turtle': N3Parser
-  })
-}
 
 export default class UduvuduShell extends HydrofoilShellBase {
   constructor() {
@@ -31,9 +22,29 @@ export default class UduvuduShell extends HydrofoilShellBase {
   }
 
   async loadResourceInternal (source) {
+    let rdfFetch
+    let rdf
+    let N3Parser
+
+    await Promise.all([
+      import('rdf-fetch-lite'),
+      import('rdf-ext'),
+      import('rdf-parser-n3')
+    ]).then(resolved => {
+      rdfFetch = resolved[0].default
+        rdf = resolved[1]
+        N3Parser = resolved[2].default
+    })
+
+    let formats = {
+      parsers: new rdf.Parsers({
+        'text/turtle': N3Parser
+      })
+    }
+
     const query = 'http://dbpedia.org/sparql?query=' + encodeURIComponent(this.getQuery(source)) + '&format=' + encodeURIComponent('text/turtle')
 
-    const graph = await graphPromise(query)
+    const graph = await rdfFetch(query, { formats }).then(res => res.dataset())
     const matchingResult =  await doMatching(graph, source)
 
     return matchingResult.sort((a, b) => b.order - a.order)
@@ -86,10 +97,6 @@ export default class UduvuduShell extends HydrofoilShellBase {
                   <strong>Error:</strong> ${this.lastError.message} <br> ${this.lastError.stack}.
                 </div>`
   }
-}
-
-function graphPromise(query) {
-  return rdfFetch(query, { formats }).then(res => res.dataset())
 }
 
 async function doMatching(graph, resource) {

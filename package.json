@@ -18,6 +18,7 @@
     "paper-collapse-item": "^4.0.5",
     "rdf-ext": "1.1",
     "rdf-fetch-lite": "^1.1.2",
+    "rdf-parser-n3": "^1.1.1",
     "rdf-store-web": "^1.0.0",
     "uduvudu": "https://github.com/hypermedia-app/uduvudu#lit-uduvudu",
     "xtal-chart-istic": "^0.0.6"
