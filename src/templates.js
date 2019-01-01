@@ -152,22 +152,16 @@ export const humidity = (humi) => {
   </div>`
 }
 
-export const location = (location) => html`
- <div id="map-canvas" style="height: 250px; width: 560px; float: left;">
-   <big>&#8982;</big> ${location.lat.u} / ${location.long.u}
- </div>`
+export const location = (location) => {
+  import('./google-map')
 
-//export const location_js = (location_js) =>
-// var script = document.createElement("script");
-// script.type = "text/javascript";
-// script.src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyAFRTcPPyYit9ERj9COlgpgYW-Ve-lUeUs&sensor=false&callback=initializeMap";
-// document.body.appendChild(script);
-//
-// initializeMap = function () {
-//   var myLatlng = new google.maps.LatLng(${location.lat.u}, ${location.long.u});
-//   var mapOptions = { center: myLatlng, disableDefaultUI: true, zoomControl: true, zoom: 12, mapTypeId: google.maps.MapTypeId.ROADMAP };
-//   var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-// };
+  return html`
+   <div style="height: 250px; width: 560px; float: left;">
+     <big>&#8982;</big> ${location.lat.u} / ${location.long.u}
+     
+     <google-map latitude="${location.lat.u}" longitude="${location.long.u}" key="AIzaSyAFRTcPPyYit9ERj9COlgpgYW-Ve-lUeUs"></google-map>
+   </div>`
+}
 
 export const created = (created) => html`
  <div style="height: 235px; width: 140px; float: left;">
