@@ -105,43 +105,30 @@ export const website = (website) => html`
     <p><i class="glyphicon glyphicon-link"></i> <a href="${website.u}">${website.u}</a></p>
   </div>`
 
-//export const mhltemp = (mhltemp) =>
-//   <div style="float: left">
-//   <br>
-//   <h3>Temperatures per Month</h3>
-// <canvas id="cvs_mhltemp" width="560px" height="200px"></canvas>
-//   <p>Temperatures in °C/month: <span style="color: rgba(120,120,220,1)">Average Low</span>, <span style="color: rgba(220,220,220,1)">Daily Mean</span>, <span style="color: rgba(220,120,120,1)">Average High</span></p>
-// </div>
+export const tempC = (tempC) => {
+  import('@granite-elements/granite-c3/granite-c3')
 
-//export const mhltemp_js = (mhltemp_js) =>
-// var script = document.createElement("script");
-// script.type = "text/javascript";
-// script.src = "http://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js";
-// script.onload = function(){
-//   var ctx = document.getElementById("cvs_mhltemp").getContext("2d");
-//   var data = {
-//     labels : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
-//     datasets : [
-//       {
-//         fillColor : "rgba(120,120,220,0.5)",
-//         strokeColor : "rgba(220,220,220,1)",
-//         data : [${num(tempC.lowC.jan.u)},${num(tempC.lowC.feb.u)},${num(tempC.lowC.mar.u)},${num(tempC.lowC.apr.u)},${num(tempC.lowC.may.u)},${num(tempC.lowC.jun.u)},${num(tempC.lowC.jul.u)},${num(tempC.lowC.aug.u)},${num(tempC.lowC.sep.u)},${num(tempC.lowC.oct.u)},${num(tempC.lowC.nov.u)},${num(tempC.lowC.dec.u)}]
-// },
-//   {
-//     fillColor : "rgba(220,220,220,0.5)",
-//       strokeColor : "rgba(220,220,220,1)",
-//     data : [${num(tempC.meanC.jan.u)},${num(tempC.meanC.feb.u)},${num(tempC.meanC.mar.u)},${num(tempC.meanC.apr.u)},${num(tempC.meanC.may.u)},${num(tempC.meanC.jun.u)},${num(tempC.meanC.jul.u)},${num(tempC.meanC.aug.u)},${num(tempC.meanC.sep.u)},${num(tempC.meanC.oct.u)},${num(tempC.meanC.nov.u)},${num(tempC.meanC.dec.u)}]
-//   },
-//   {
-//     fillColor : "rgba(220,120,120,0.5)",
-//       strokeColor : "rgba(220,220,220,1)",
-//     data : [${num(tempC.highC.jan.u)},${num(tempC.highC.feb.u)},${num(tempC.highC.mar.u)},${num(tempC.highC.apr.u)},${num(tempC.highC.may.u)},${num(tempC.highC.jun.u)},${num(tempC.highC.jul.u)},${num(tempC.highC.aug.u)},${num(tempC.highC.sep.u)},${num(tempC.highC.oct.u)},${num(tempC.highC.nov.u)},${num(tempC.highC.dec.u)}]
-//   }
-// ]
-// }
-//   new Chart(ctx).Bar(data);
-// };
-// document.body.appendChild(script);
+  const months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec']
+
+  const getSeries = (data) => {
+    return months.map(month => Number.parseFloat(data[month].u))
+  }
+
+  const chartData = {
+    columns: [
+      [ 'Average Low', ...getSeries(tempC.lowC) ],
+      [ 'Daily Mean', ...getSeries(tempC.meanC) ],
+      [ 'Average High', ...getSeries(tempC.highC) ]
+    ]
+  }
+
+  return html`
+  <div>
+    <br>
+    <h3>Temperatures per Month</h3>
+    <granite-c3 .data="${chartData}"></granite-c3>
+  </div>`
+}
 
 export const humidity = (humidity) => html`
 <div style="float: left">
@@ -163,7 +150,7 @@ export const humidity = (humidity) => html`
 //       {
 //         fillColor : "rgba(120,220,120,0.5)",
 //         strokeColor : "rgba(220,220,220,1)",
-//         data : [${humi.jan.u},${humi.feb.u},${humi.mar.u},${humi.apr.u},${humi.may.u},${humi.jun.u},${humi.jul.u},${humi.aug.u},${humi.sep.u},${humi.oct.u},${humi.nov.u},${humi.dec.u}]
+//         data : [${humi.jan.u, humi.feb.u, humi.mar.u, humi.apr.u, humi.may.u, humi.jun.u, humi.jul.u, humi.aug.u, humi.sep.u, humi.oct.u, humi.nov.u, humi.dec.u}]
 // }
 // ]
 // }

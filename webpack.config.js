@@ -121,7 +121,7 @@ module.exports = {
         // We need to transpile Polymer itself and other ES6 code
         // exclude: /(node_modules)/,
         use: {
-          loader: 'babel-loader',
+          loader: require.resolve('@open-wc/webpack/loaders/import-meta-url-loader.js'),
           options: {
             presets: [[
               '@babel/preset-env',
