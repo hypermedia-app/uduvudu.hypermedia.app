@@ -44,7 +44,7 @@ export default class UduvuduShell extends HydrofoilShellBase {
       })
     }
 
-    const query = 'http://dbpedia.org/sparql?query=' + encodeURIComponent(this.getQuery(source)) + '&format=' + encodeURIComponent('text/turtle')
+    const query = 'https://dbpedia.org/sparql?query=' + encodeURIComponent(this.getQuery(source)) + '&format=' + encodeURIComponent('text/turtle')
 
     const graph = await rdfFetch(query, { formats }).then(res => res.dataset())
     const matchingResult =  await doMatching(graph, source)
