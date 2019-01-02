@@ -73,7 +73,7 @@ Revision: <a href="http://en.wikipedia.org/?curid=${wikiInfo.wikiPageID.u}&oldid
 
 export const community = (community, template) =>
   html`<div style="max-height: 300px; width: 560px; background-color: lightgrey; padding: 4px; float: left; overflow-y: scroll;">
-  <div style=" width: 235px; overflow: hidden; margin: -4px; text-align: right;" class="pull-right">
+  <div style=" width: 235px; overflow: hidden; margin: -4px; text-align: right; float: right">
   <img style="max-height: 300px; max-width: 235px; margin-bottom: 10px; margin-left: 10px;" src="${community.img_url.u}" />
 </div>
 ${template(community.label_comment)}
@@ -107,7 +107,7 @@ export const website = (website) => html`
 
 export const tempC = (tempC) => {
   window['xtal_chart_istic'] = {
-    href: '/node_modules/xtal-chart-istic/chartist.js'
+    href: '/vendor/xtal-chart-istic/chartist.js'
   }
 
   import('xtal-chart-istic/xtal-chart-istic')
@@ -139,7 +139,7 @@ export const tempC = (tempC) => {
 
 export const humidity = (humi) => {
   window['xtal_chart_istic'] = {
-    href: '/node_modules/xtal-chart-istic/chartist.js'
+    href: '/vendor/xtal-chart-istic/chartist.js'
   }
 
   import('xtal-chart-istic/xtal-chart-istic')

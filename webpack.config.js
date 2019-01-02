@@ -61,6 +61,11 @@ const copyStatics = {
     from: resolve('./manifest.json'),
     to: OUTPUT_PATH,
     flatten: true
+  }],
+  copyThirdParty: [{
+    from: resolve('node_modules/xtal-chart-istic/chartist.min.*'),
+    to: join(OUTPUT_PATH, 'vendor/xtal-chart-istic/'),
+    flatten: true
   }]
 };
 
@@ -96,7 +101,11 @@ const sharedPlugins = [
   new webpack.DefinePlugin({'process.env': processEnv}),
   ...renderHtmlPlugins()
 ];
-const devPlugins = [new CopyWebpackPlugin(copyStatics.copyWebcomponents)];
+const devPlugins = [
+  new CopyWebpackPlugin(
+    [].concat(copyStatics.copyWebcomponents, copyStatics.copyThirdParty )
+  )
+];
 const buildPlugins = [
   new CopyWebpackPlugin(
     [].concat(copyStatics.copyWebcomponents, copyStatics.copyOthers)
