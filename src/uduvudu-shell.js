@@ -3,12 +3,12 @@ import {html} from '@polymer/lit-element'
 import './views'
 
 import '@polymer/paper-toast/paper-toast'
+import '@polymer/paper-styles/typography'
 
 export default class UduvuduShell extends HydrofoilShellBase {
   constructor() {
     super()
 
-    this.language = navigator.language.substring(0,2) || "en"
     this.model = []
     this.lastError = {}
   }
@@ -24,6 +24,10 @@ export default class UduvuduShell extends HydrofoilShellBase {
   }
 
   async loadResourceInternal (source) {
+    if (source === this.baseUrl) {
+      return []
+    }
+
     let rdfFetch
     let rdf
     let N3Parser
