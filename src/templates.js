@@ -115,7 +115,7 @@ const tempGraph = (chartData) => {
   </monthly-chart>`
 }
 
-export const temp = (tempC) => {
+export const tempC = (tempC) => {
   return tempGraph({
     'Average Low': tempC.lowC,
     'Daily Mean': tempC.meanC,
