@@ -1,30 +1,467 @@
 /***/
 
-// EXTERNAL MODULE: ./node_modules/@polymer/lit-element/lit-element.js + 4 modules
+// EXTERNAL MODULE: ./node_modules/@polymer/polymer/polymer-element.js
 
-// CONCATENATED MODULE: ./node_modules/xtal-latx/xtal-latx.js
+// EXTERNAL MODULE: ./node_modules/@polymer/iron-icon/iron-icon.js
 
-//# sourceMappingURL=xtal-latx.js.map
-
-// CONCATENATED MODULE: ./node_modules/xtal-chart-istic/xtal-chart-istic.js
+// CONCATENATED MODULE: ./node_modules/@polymer/iron-icons/iron-icons.js
 
 /**
- * `xtal-chart-istic`
- * Vannilla-ish wrapper around chartist.js charting library
+@license
+Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/
+
+/**
+
+`iron-icons` is a utility import that includes the definition for the
+`iron-icon` element, `iron-iconset-svg` element, as well as an import for the
+default icon set.
+
+The `iron-icons` directory also includes imports for additional icon sets that
+can be loaded into your project.
+
+Example loading icon set:
+
+    <script type="module">
+      import '@polymer/iron-icons/maps-icons.js';
+    </script>
+
+To use an icon from one of these sets, first prefix your `iron-icon` with the
+icon set name, followed by a colon, ":", and then the icon id.
+
+Example using the directions-bus icon from the maps icon set:
+
+    <iron-icon icon="maps:directions-bus"></iron-icon>
+
+See [iron-icon](https://www.webcomponents.org/element/@polymer/iron-icon) for
+more information about working with icons.
+
+See [iron-iconset](https://www.webcomponents.org/element/@polymer/iron-iconset)
+and
+[iron-iconset-svg](https://www.webcomponents.org/element/@polymer/iron-iconset-svg)
+for more information about how to create a custom iconset.
+
+@group Iron Elements
+@pseudoElement iron-icons
+@demo demo/index.html
+*/
+
+// EXTERNAL MODULE: ./node_modules/@polymer/iron-resizable-behavior/iron-resizable-behavior.js
+
+// EXTERNAL MODULE: ./node_modules/@polymer/polymer/lib/legacy/polymer-fn.js + 1 modules
+
+// CONCATENATED MODULE: ./node_modules/@polymer/iron-collapse/iron-collapse.js
+
+/**
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/
+
+/**
+`iron-collapse` creates a collapsible block of content.  By default, the content
+will be collapsed.  Use `opened` or `toggle()` to show/hide the content.
+
+    <button on-click="toggle">toggle collapse</button>
+
+    <iron-collapse id="collapse">
+      <div>Content goes here...</div>
+    </iron-collapse>
+
+    ...
+
+    toggle: function() {
+      this.$.collapse.toggle();
+    }
+
+`iron-collapse` adjusts the max-height/max-width of the collapsible element to
+show/hide the content.  So avoid putting padding/margin/border on the
+collapsible directly, and instead put a div inside and style that.
+
+    <style>
+      .collapse-content {
+        padding: 15px;
+        border: 1px solid #dedede;
+      }
+    </style>
+
+    <iron-collapse>
+      <div class="collapse-content">
+        <div>Content goes here...</div>
+      </div>
+    </iron-collapse>
+
+### Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--iron-collapse-transition-duration` | Animation transition duration | `300ms`
+
+@group Iron Elements
+@hero hero.svg
+@demo demo/index.html
+@element iron-collapse
+*/
+
+/**
+     * If true, the orientation is horizontal; otherwise is vertical.
+     *
+     * @attribute horizontal
+     */
+
+/**
+     * Set opened to true to show the collapse element and to false to hide it.
+     *
+     * @attribute opened
+     */
+
+/**
+     * When true, the element is transitioning its opened state. When false,
+     * the element has finished opening/closing.
+     *
+     * @attribute transitioning
+     */
+
+/**
+     * Set noAnimation to true to disable animations.
+     *
+     * @attribute noAnimation
+     */
+
+/**
+     * Stores the desired size of the collapse body.
+     * @private
+     */
+
+/**
+   * `maxWidth` or `maxHeight`.
+   * @private
+   */
+
+/**
+   * `max-width` or `max-height`.
+   * @private
+   */
+
+/**
+   * Toggle the opened state.
+   *
+   * @method toggle
+   */
+
+/**
+   * Updates the size of the element.
+   * @param {string} size The new value for `maxWidth`/`maxHeight` as css property value, usually `auto` or `0px`.
+   * @param {boolean=} animated if `true` updates the size with an animation, otherwise without.
+   */
+
+// Consider 'auto' as '', to take full size.
+
+// If we can animate, must do some prep work.
+
+// Animation will start at the current size.
+
+// For `auto` we must calculate what is the final size for the animation.
+
+// After the transition is done, _transitionEnd will set the size back to
+
+// `auto`.
+
+// Go to startSize without animation.
+
+// Force layout to ensure transition will go. Set scrollTop to itself
+
+// so that compilers won't remove it.
+
+// Enable animation.
+
+// If final size is the same as startSize it will not animate.
+
+// Set the final size.
+
+// If it won't animate, call transitionEnd to set correct classes.
+
+/**
+   * enableTransition() is deprecated, but left over so it doesn't break
+   * existing code. Please use `noAnimation` property instead.
+   *
+   * @method enableTransition
+   * @deprecated since version 1.0.4
+   */
+
+// Focus the current collapse.
+
+// EXTERNAL MODULE: ./node_modules/@polymer/paper-styles/default-theme.js
+
+// EXTERNAL MODULE: ./node_modules/@polymer/iron-behaviors/iron-button-state.js
+
+// CONCATENATED MODULE: ./node_modules/@polymer/paper-behaviors/paper-ripple-behavior.js
+
+/**
+ * `PaperRippleBehavior` dynamically implements a ripple when the element has
+ * focus via pointer or keyboard.
+ *
+ * NOTE: This behavior is intended to be used in conjunction with and after
+ * `IronButtonState` and `IronControlState`.
+ *
+ * @polymerBehavior PaperRippleBehavior
+ */
+
+/**
+     * If true, the element will not produce a ripple effect when interacted
+     * with via the pointer.
+     */
+
+/**
+     * @type {Element|undefined}
+     */
+
+/**
+   * Ensures a `<paper-ripple>` element is available when the element is
+   * focused.
+   */
+
+/**
+   * In addition to the functionality provided in `IronButtonState`, ensures
+   * a ripple effect is created when the element is in a `pressed` state.
+   */
+
+/**
+   * Ensures this element contains a ripple effect. For startup efficiency
+   * the ripple effect is dynamically on demand when needed.
+   * @param {!Event=} optTriggeringEvent (optional) event that triggered the
+   * ripple.
+   */
+
+// Check if the event happened inside of the ripple container
+
+// Fall back to host instead of the root because distributed text
+
+// nodes are not valid event targets
+
+/** @type {Node} */
+
+/**
+   * Returns the `<paper-ripple>` element used by this element to create
+   * ripple effects. The element's ripple is created on demand, when
+   * necessary, and calling this method will force the
+   * ripple to be created.
+   */
+
+/**
+   * Returns true if this element currently contains a ripple effect.
+   * @return {boolean}
+   */
+
+/**
+   * Create the element's ripple effect via creating a `<paper-ripple>`.
+   * Override this method to customize the ripple element.
+   * @return {!PaperRippleElement} Returns a `<paper-ripple>` element.
+   */
+
+/** @type {!PaperRippleElement} */
+
+// CONCATENATED MODULE: ./node_modules/@polymer/paper-behaviors/paper-inky-focus-behavior.js
+
+/**
+ * `PaperInkyFocusBehavior` implements a ripple when the element has keyboard
+ * focus.
+ *
+ * @polymerBehavior PaperInkyFocusBehavior
+ */
+
+/**
+Material design: [Icon
+toggles](https://www.google.com/design/spec/components/buttons.html#buttons-toggle-buttons)
+
+`paper-icon-button` is a button with an image placed at the center. When the
+user touches the button, a ripple effect emanates from the center of the button.
+
+`paper-icon-button` does not include a default icon set. To use icons from the
+default set, include `PolymerElements/iron-icons/iron-icons.html`, and use the
+`icon` attribute to specify which icon from the icon set to use.
+
+    <paper-icon-button icon="menu"></paper-icon-button>
+
+See [`iron-iconset`](iron-iconset) for more information about
+how to use a custom icon set.
+
+Example:
+
+    <script type="module">
+      import '@polymer/iron-icons/iron-icons.js';
+    </script>
+
+    <paper-icon-button icon="favorite"></paper-icon-button>
+    <paper-icon-button src="star.png"></paper-icon-button>
+
+To use `paper-icon-button` as a link, wrap it in an anchor tag. Since
+`paper-icon-button` will already receive focus, you may want to prevent the
+anchor tag from receiving focus as well by setting its tabindex to -1.
+
+    <a href="https://www.polymer-project.org" tabindex="-1">
+      <paper-icon-button icon="polymer"></paper-icon-button>
+    </a>
+
+### Styling
+
+Style the button with CSS as you would a normal DOM element. If you are using
+the icons provided by `iron-icons`, they will inherit the foreground color of
+the button.
+
+    /* make a red "favorite" button *\/
+    <paper-icon-button icon="favorite" style="color: red;"></paper-icon-button>
+
+By default, the ripple is the same color as the foreground at 25% opacity. You
+may customize the color using the `--paper-icon-button-ink-color` custom
+property.
+
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--paper-icon-button-disabled-text` | The color of the disabled button | `--disabled-text-color`
+`--paper-icon-button-ink-color` | Selected/focus ripple color | `--primary-text-color`
+`--paper-icon-button` | Mixin for a button | `{}`
+`--paper-icon-button-disabled` | Mixin for a disabled button | `{}`
+`--paper-icon-button-hover` | Mixin for button on hover | `{}`
+
+@group Paper Elements
+@element paper-icon-button
+@demo demo/index.html
+*/
+
+/**
+     * The URL of an image for the icon. If the src property is specified,
+     * the icon property should not be.
+     */
+
+/**
+     * Specifies the icon name or index in the set of icons available in
+     * the icon's icon set. If the icon property is specified,
+     * the src property should not be.
+     */
+
+/**
+     * Specifies the alternate text for the button, for accessibility.
+     */
+
+// Don't stomp over a user-set aria-label.
+
+// EXTERNAL MODULE: ./node_modules/@polymer/paper-item/paper-item.js + 1 modules
+
+// EXTERNAL MODULE: ./node_modules/@polymer/iron-flex-layout/iron-flex-layout.js
+
+// CONCATENATED MODULE: ./node_modules/@polymer/paper-item/paper-item-body.js
+
+/*
+Use `<paper-item-body>` in a `<paper-item>` or `<paper-icon-item>` to make two-
+or three- line items. It is a flex item that is a vertical flexbox.
+
+    <paper-item>
+      <paper-item-body two-line>
+        <div>Show your status</div>
+        <div secondary>Your status is visible to everyone</div>
+      </paper-item-body>
+    </paper-item>
+
+The child elements with the `secondary` attribute is given secondary text
+styling.
+
+### Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--paper-item-body-two-line-min-height` | Minimum height of a two-line item | `72px`
+`--paper-item-body-three-line-min-height` | Minimum height of a three-line item | `88px`
+`--paper-item-body-secondary-color` | Foreground color for the `secondary` area | `--secondary-text-color`
+`--paper-item-body-secondary` | Mixin applied to the `secondary` area | `{}`
+
+*/
+
+// EXTERNAL MODULE: ./node_modules/@polymer/paper-styles/color.js
+
+// EXTERNAL MODULE: ./node_modules/@polymer/paper-styles/shadow.js
+
+// CONCATENATED MODULE: ./node_modules/paper-collapse-item/simple-paper-item.js
+
+/*
+    A <paper-item> that avoids problems with <paper-input> children.  See
+href="https://github.com/PolymerElements/paper-item/issues/103  for details.
+
+    */
+
+// CONCATENATED MODULE: ./node_modules/paper-collapse-item/paper-collapse-item.js
+
+/**
+ * `PaperCollapseItem`
+ *
+ * A Material Design [item with header and collapsible content](https://www.google.com/design/spec/components/lists.html)
+ *
+ * ### Example
+ *
+ * ```html
+ * <paper-collapse-item icon="icons:favorite" header="Item 1" opened>
+ *  Lots of very interesting content.
+ * </paper-collapse-item>
+ * <paper-collapse-item icon="icons:info" header="Item 2">
+ *   Lots of very interesting content.
+ * </paper-collapse-item>
+ * <paper-collapse-item icon="icons:help" header="Item 3">
+ *   Lots of very interesting content.
+ * </paper-collapse-item>
+ * ```
+ * ### Styling
+ *
+ * The following custom properties and mixins are available for styling:
+ * Custom property | Description | Default
+ * ----------------|-------------|----------
+ * --paper-collapse-item-header|Mixin applied to header of collapsible item|{}
+ * --paper-collapse-item-content|Mixin applied to collapsible content|{}
+ * --paper-collapse-item-icon|Mixin applied to icon|{}
+ * --paper-collapse-simple-paper-item-styles|Mixin applied to simple-paper-item|{}
  *
  * @customElement
  * @polymer
  * @demo demo/index.html
  */
 
-//Firefox induced train wreck
+/**
+			 * Text in the header row
+			 */
 
-// script.src = basePath + '/materials/liquidDistortMaterial.js';
+/**
+			 * The name of the icon to use. The name should be of the
+			 * form: iconset_name:icon_name.
+			 */
 
-/*html*/
+/**
+			 * If using paper-collapse-item without an iconset, you can set the
+			 * src to be the URL of an individual icon image file. Note that
+			 * this will take precedence over a given icon attribute.
+			 */
 
-//# sourceMappingURL=xtal-chart-istic.js.map
+/**
+			 * True if the content section is opened
+			 */
 
-// CONCATENATED MODULE: ./src/monthly-chart.js
-
-/* harmony export (binding) */
+/**
+	 * Fired whenever the status is changed (opened/closed)
+	 *
+	 * @event toggle
+	 */

@@ -1,4 +1,4 @@
-/* 46 */
+/* 53 */
 
 /***/
 
@@ -372,15 +372,17 @@
 
 // Montgomery method engine
 
-/* 47 */
+/* 54 */
 
 // Protocols
 
-/* 48 */
+/* 55 */
 
-/* 49 */
+/* 56 */
 
-/* 50 */
+/* 57 */
+
+/* 58 */
 
 // Inspired by stringToUtf8ByteArray() in closure-library by Google
 
@@ -390,17 +392,21 @@
 
 // https://github.com/google/closure-library/blob/master/LICENSE
 
-/* 51 */
+/* 59 */
 
-/* 52 */
+/* 60 */
 
-/* 53 */
+/* 61 */
 
-/* 54 */
+/* 62 */
 
-/* 55 */
+/* 63 */
 
-/* 56 */
+/* 64 */
+
+/* 65 */
+
+/* 66 */
 
 // phantomjs needs to throw
 
@@ -414,7 +420,7 @@
 
 // XXX: phantomjs doesn't like a buffer being passed here
 
-/* 57 */
+/* 67 */
 
 // prototype class for hash functions
 
@@ -426,15 +432,15 @@
 
 // uint64
 
-/* 58 */
+/* 68 */
 
-/* 59 */
+/* 69 */
 
-/* 60 */
+/* 70 */
 
-/* 61 */
+/* 71 */
 
-/* 62 */
+/* 72 */
 
 // Enough data, try updating
 
@@ -444,19 +450,23 @@
 
 // Append length
 
-/* 63 */
+/* 73 */
 
-/* 64 */
+/* 74 */
 
-/* 65 */
+/* 75 */
 
-/* 66 */
+/* 76 */
 
-/* 67 */
+/* 77 */
 
-/* 68 */
+/* 78 */
 
-/* 69 */
+/* 79 */
+
+/* 80 */
+
+/* 81 */
 
 // based on the aes implimentation in triple sec
 
@@ -478,61 +488,21 @@
 
 // swap
 
-/* 70 */
+/* 82 */
 
 /* eslint-disable camelcase */
 
-/* 71 */
-
-/* 72 */
-
-// falls through
-
-/* 73 */
-
-/* 74 */
-
-/* 75 */
-
-/* 76 */
-
-/* 77 */
-
-// state
-
-// create padding and handle blocks
-
-// produce result
-
-/* 78 */
-
-// computation
-
-// if (i<80) {
-
-// update state
-
-/* 79 */
-
-/* 80 */
-
-/* 81 */
-
-/* 82 */
-
 /* 83 */
 
-// module.parent = undefined by default
-
 /* 84 */
+
+// falls through
 
 /* 85 */
 
 /* 86 */
 
 /* 87 */
-
-// Proxy hash functions to the main object
 
 /* 88 */
 
@@ -542,7 +512,19 @@
 
 /* 91 */
 
+// state
+
+// create padding and handle blocks
+
+// produce result
+
 /* 92 */
+
+// computation
+
+// if (i<80) {
+
+// update state
 
 /* 93 */
 
@@ -554,6 +536,8 @@
 
 /* 97 */
 
+// module.parent = undefined by default
+
 /* 98 */
 
 /* 99 */
@@ -562,7 +546,7 @@
 
 /* 101 */
 
-// TODO: escape special chars
+// Proxy hash functions to the main object
 
 /* 102 */
 
@@ -574,27 +558,9 @@
 
 /* 106 */
 
-// consume data
-
-// update length
-
-// reset state
-
 /* 107 */
 
-/**
- * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
- * in FIPS 180-2
- * Version 2.2-beta Copyright Angel Marin, Paul Johnston 2000 - 2009.
- * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
- *
- */
-
-// new Array(64)
-
 /* 108 */
-
-// t2 = sigma0 + maj
 
 /* 109 */
 
@@ -606,13 +572,7 @@
 
 /* 113 */
 
-// default in iojs
-
-/* eslint no-self-compare: 0 */
-
 /* 114 */
-
-/* istanbul ignore next */
 
 /* 115 */
 
@@ -628,9 +588,75 @@
 
 /* 121 */
 
-// this is what openssl does
+// TODO: escape special chars
 
 /* 122 */
+
+/* 123 */
+
+/* 124 */
+
+/* 125 */
+
+/* 126 */
+
+// consume data
+
+// update length
+
+// reset state
+
+/* 127 */
+
+/**
+ * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
+ * in FIPS 180-2
+ * Version 2.2-beta Copyright Angel Marin, Paul Johnston 2000 - 2009.
+ * Other contributors: Greg Holt, Andrew Kepert, Ydnar, Lostinet
+ *
+ */
+
+// new Array(64)
+
+/* 128 */
+
+// t2 = sigma0 + maj
+
+/* 129 */
+
+/* 130 */
+
+/* 131 */
+
+/* 132 */
+
+/* 133 */
+
+// default in iojs
+
+/* eslint no-self-compare: 0 */
+
+/* 134 */
+
+/* istanbul ignore next */
+
+/* 135 */
+
+/* 136 */
+
+/* 137 */
+
+/* 138 */
+
+/* 139 */
+
+/* 140 */
+
+/* 141 */
+
+// this is what openssl does
+
+/* 142 */
 
 // Generage random bytes until a number less than n is found.
 
@@ -640,7 +666,7 @@
 
 // Find d and s, (n - 1) = (2 ^ s) * d;
 
-/* 123 */
+/* 143 */
 
 // Emulate crypto API using randy
 
@@ -652,31 +678,31 @@
 
 // Node.js or Web worker with no crypto support
 
-/* 124 */
+/* 144 */
 
-/* 125 */
+/* 145 */
 
-/* 126 */
+/* 146 */
 
-/* 127 */
+/* 147 */
 
 // 32 x 32bit words
 
 // i - 2
 
-/* 128 */
+/* 148 */
 
 // Return skipped data
 
 // Share reporter state
 
-/* 129 */
+/* 149 */
 
 // Helper
 
 // Convert key to integer if it is stringified
 
-/* 130 */
+/* 150 */
 
 // Construct base tree
 
@@ -700,53 +726,13 @@
 
 // Bigint, return as it is (assume big endian)
 
-/* 131 */
+/* 151 */
 
 // Count octets required to store length
 
 // Count number of octets
 
 // Bignum, assume big endian
-
-/* 132 */
-
-/* 133 */
-
-/* 134 */
-
-/* 135 */
-
-/* 136 */
-
-/* 137 */
-
-/* 138 */
-
-/* 139 */
-
-/* 140 */
-
-/* 141 */
-
-/* 142 */
-
-/* 143 */
-
-/* 144 */
-
-/* 145 */
-
-/* 146 */
-
-/* 147 */
-
-/* 148 */
-
-/* 149 */
-
-/* 150 */
-
-/* 151 */
 
 /* 152 */
 
@@ -799,6 +785,50 @@
 /* 176 */
 
 /* 177 */
+
+/* 178 */
+
+/* 179 */
+
+/* 180 */
+
+/* 181 */
+
+/* 182 */
+
+/* 183 */
+
+/* 184 */
+
+/* 185 */
+
+/* 186 */
+
+/* 187 */
+
+/* 188 */
+
+/* 189 */
+
+/* 190 */
+
+/* 191 */
+
+/* 192 */
+
+/* 193 */
+
+/* 194 */
+
+/* 195 */
+
+/* 196 */
+
+/* 197 */
+
+/* 198 */
+
+/* 199 */
 
 /**
  * A JavaScript implementation of the JSON-LD API.
@@ -1119,7 +1149,7 @@
      * @return the hexadecimal SHA-1 message digest.
      */
 
-/* 178 */
+/* 200 */
 
 // the least I can do is make error messages for the rest of the node.js/crypto api.
 
@@ -1145,15 +1175,15 @@
 
 // })
 
-/* 179 */
+/* 201 */
 
-/* 180 */
+/* 202 */
 
-/* 181 */
+/* 203 */
 
-/* 182 */
+/* 204 */
 
-/* 183 */
+/* 205 */
 
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-0, as defined
@@ -1163,7 +1193,7 @@
  * operation was added.
  */
 
-/* 184 */
+/* 206 */
 
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
@@ -1174,21 +1204,21 @@
  * See http://pajhome.org.uk/crypt/md5 for details.
  */
 
-/* 185 */
+/* 207 */
 
-/* 186 */
+/* 208 */
 
-/* 187 */
+/* 209 */
 
-/* 188 */
+/* 210 */
 
-/* 189 */
+/* 211 */
 
-/* 190 */
+/* 212 */
 
-/* 191 */
+/* 213 */
 
-/* 192 */
+/* 214 */
 
 // 7, 15, 23, 31, 39, 47, 55, 63
 
@@ -1210,7 +1240,7 @@
 
 // inR => outR
 
-/* 193 */
+/* 215 */
 
 // Might be overrided
 
@@ -1226,7 +1256,7 @@
 
 // Buffer rest of the input
 
-/* 194 */
+/* 216 */
 
 // Initial Permutation
 
@@ -1236,25 +1266,25 @@
 
 // Reverse Initial Permutation
 
-/* 195 */
+/* 217 */
 
-/* 196 */
+/* 218 */
 
-/* 197 */
+/* 219 */
 
-/* 198 */
+/* 220 */
 
-/* 199 */
+/* 221 */
 
-/* 200 */
+/* 222 */
 
-/* 201 */
+/* 223 */
 
-/* 202 */
+/* 224 */
 
-/* 203 */
+/* 225 */
 
-/* 204 */
+/* 226 */
 
 // from http://bitwiseshiftleft.github.io/sjcl/doc/symbols/src/core_gcm.js.html
 
@@ -1268,15 +1298,15 @@
 
 // If LSB(V_i) is 1, V_i+1 = (V_i >> 1) ^ R
 
-/* 205 */
+/* 227 */
 
-/* 206 */
+/* 228 */
 
-/* 207 */
+/* 229 */
 
-/* 208 */
+/* 230 */
 
-/* 209 */
+/* 231 */
 
 //not a prime so +1
 
@@ -1290,9 +1320,9 @@
 
 // prime mod 10 needs to equal 3 or 7
 
-/* 210 */
+/* 232 */
 
-/* 211 */
+/* 233 */
 
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 
@@ -1300,9 +1330,9 @@
 
 // Pad values
 
-/* 212 */
+/* 234 */
 
-/* 213 */
+/* 235 */
 
 // Represent num in a w-NAF form
 
@@ -1314,7 +1344,7 @@
 
 // Second phase
 
-/* 214 */
+/* 236 */
 
 // Use Montgomery, when there is no fast reduction for the prime
 
@@ -1372,7 +1402,7 @@
 
 // uncompressed, hybrid-odd, hybrid-even
 
-/* 215 */
+/* 237 */
 
 // If the curve is endomorphic, precalculate beta and lambda
 
@@ -1510,7 +1540,7 @@
 
 // XXX This code assumes that zero is always zero in red
 
-/* 216 */
+/* 238 */
 
 // No-op
 
@@ -1542,7 +1572,7 @@
 
 // Normalize coordinates
 
-/* 217 */
+/* 239 */
 
 // NOTE: Important as we are creating point in Base.call()
 
@@ -1636,7 +1666,7 @@
 
 // Compatibility with BaseCurve
 
-/* 218 */
+/* 240 */
 
 // -121665 * (121666^(-1)) (mod P)
 
@@ -1644,19 +1674,19 @@
 
 // Precomputed endomorphism
 
-/* 219 */
+/* 241 */
 
-/* 220 */
+/* 242 */
 
-/* 221 */
+/* 243 */
 
 // Just truncate output
 
-/* 222 */
+/* 244 */
 
-/* 223 */
+/* 245 */
 
-/* 224 */
+/* 246 */
 
 // Shorten key, if needed
 
@@ -1664,9 +1694,9 @@
 
 // 0x36 ^ 0x5c = 0x6a
 
-/* 225 */
+/* 247 */
 
-/* 226 */
+/* 248 */
 
 // Shortcut `elliptic.ec(curve-name)`
 
@@ -1696,7 +1726,7 @@
 
 //               Q = r^-1 (sR + -eG)
 
-/* 227 */
+/* 249 */
 
 // Optional entropy enc
 
@@ -1704,7 +1734,7 @@
 
 // Optional additional data
 
-/* 228 */
+/* 250 */
 
 // KeyPair(ec, { priv: ..., pub: ... })
 
@@ -1724,9 +1754,9 @@
 
 // ECDSA
 
-/* 229 */
+/* 251 */
 
-/* 230 */
+/* 252 */
 
 /**
 * @param {Array|String} message - message bytes
@@ -1750,7 +1780,7 @@
 *
 */
 
-/* 231 */
+/* 253 */
 
 /**
 * @param {EDDSA} eddsa - instance
@@ -1762,7 +1792,7 @@
 *
 */
 
-/* 232 */
+/* 254 */
 
 /**
 * @param {EDDSA} eddsa - eddsa instance
@@ -1773,13 +1803,13 @@
 * @param {Array<Bytes>} [sig.Sencoded] - S scalar encoded
 */
 
-/* 233 */
+/* 255 */
 
 // from https://github.com/indutny/self-signed/blob/gh-pages/lib/asn1.js
 
 // Fedor, you are amazing.
 
-/* 234 */
+/* 256 */
 
 // Lazily create decoder
 
@@ -1787,7 +1817,7 @@
 
 /* internal */
 
-/* 235 */
+/* 257 */
 
 // win.eval() magically appears when this is called in IE:
 
@@ -1799,13 +1829,13 @@
 
 // maybe...
 
-/* 236 */
+/* 258 */
 
-/* 237 */
+/* 259 */
 
 // IE only adds stack when thrown
 
-/* 238 */
+/* 260 */
 
 // State
 
@@ -1867,54 +1897,54 @@
 
 // Wrap in explicit
 
-/* 239 */
+/* 261 */
 
-/* 240 */
+/* 262 */
 
-/* 241 */
+/* 263 */
 
 // Remove excessive symbols
 
-/* 242 */
+/* 264 */
 
-/* 243 */
+/* 265 */
 
-/* 244 */
+/* 266 */
 
 // from https://github.com/Rantanen/node-dtls/blob/25a7dc861bda38cfeac93a723500eea4f0ac2e86/Certificate.js
 
 // thanks to @Rantanen
 
-/* 245 */
+/* 267 */
 
-/* 246 */
+/* 268 */
 
 // adapted from https://github.com/apatil/pemstrip
 
-/* 247 */
+/* 269 */
 
-/* 248 */
+/* 270 */
 
 // eslint-disable-line new-cap
 
-/* 249 */
+/* 271 */
 
-/* 250 */
+/* 272 */
 
-/* 251 */
+/* 273 */
 
-/* 252 */
+/* 274 */
 
 // eslint-disable-line no-self-compare
 
-/* 253 */
+/* 275 */
 
-/* 254 */
+/* 276 */
 
-/* 255 */
+/* 277 */
 
-/* 256 */
+/* 278 */
 
-/* 257 */
+/* 279 */
 
-/* 258 */
+/* 280 */

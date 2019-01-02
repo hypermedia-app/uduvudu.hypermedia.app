@@ -1,13 +1,17 @@
 /***/
 
-// EXTERNAL MODULE: ./node_modules/@polymer/lit-element/lit-element.js + 4 modules
+// Reject the promise after a timeout
 
-// EXTERNAL MODULE: ./node_modules/lit-html/lit-html.js + 1 modules
+// Set the on load callback to a no-op
 
-// CONCATENATED MODULE: ./node_modules/@lit-any/lit-any/render/index.js
+// Hook up the on load callback
 
-// EXTERNAL MODULE: ./node_modules/@lit-any/lit-any/views/index.js + 6 modules
+// Prepare the `script` tag to be inserted into the page
 
-// CONCATENATED MODULE: ./node_modules/@lit-any/lit-any/lit-view.js
+// Insert the `script` tag
 
 /* harmony export (binding) */
+
+/* harmony import */
+
+/*#__PURE__*/

@@ -1,3 +1,751 @@
 /***/
 
-/* harmony export (binding) */
+/* WEBPACK VAR INJECTION */
+
+//     Underscore.js 1.9.1
+
+//     http://underscorejs.org
+
+//     (c) 2009-2018 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+
+//     Underscore may be freely distributed under the MIT license.
+
+// Baseline setup
+
+// --------------
+
+// Establish the root object, `window` (`self`) in the browser, `global`
+
+// on the server, or `this` in some virtual machines. We use `self`
+
+// instead of `window` for `WebWorker` support.
+
+// Save the previous value of the `_` variable.
+
+// Export the Underscore object for **Node.js**, with
+
+// backwards-compatibility for their old module API. If we're in
+
+// the browser, add `_` as a global object.
+
+// (`nodeType` is checked to ensure that `module`
+
+// and `exports` are not HTML elements.)
+
+// Current version.
+
+// Internal function that returns an efficient (for current engines) version
+
+// of the passed-in callback, to be repeatedly applied in other Underscore
+
+// functions.
+
+// The 2-argument case is omitted because we’re not using it.
+
+// External wrapper for our callback generator. Users may customize
+
+// `_.iteratee` if they want additional predicate/iteratee shorthand styles.
+
+// This abstraction hides the internal-only argCount argument.
+
+// Some functions take a variable number of arguments, or a few expected
+
+// arguments at the beginning and then a variable number of values to operate
+
+// on. This helper accumulates all remaining arguments past the function’s
+
+// argument length (or an explicit `startIndex`), into an array that becomes
+
+// the last argument. Similar to ES6’s "rest parameter".
+
+// An internal function for creating a new object that inherits from another.
+
+// Collection Functions
+
+// --------------------
+
+// The cornerstone, an `each` implementation, aka `forEach`.
+
+// Handles raw objects in addition to array-likes. Treats all
+
+// sparse array-likes as if they were dense.
+
+// Return the results of applying the iteratee to each element.
+
+// Create a reducing function iterating left or right.
+
+// **Reduce** builds up a single result from a list of values, aka `inject`,
+
+// or `foldl`.
+
+// The right-associative version of reduce, also known as `foldr`.
+
+// Return the first value which passes a truth test. Aliased as `detect`.
+
+// Return all the elements that pass a truth test.
+
+// Aliased as `select`.
+
+// Return all the elements for which a truth test fails.
+
+// Determine whether all of the elements match a truth test.
+
+// Aliased as `all`.
+
+// Determine if at least one element in the object matches a truth test.
+
+// Aliased as `any`.
+
+// Determine if the array or object contains a given item (using `===`).
+
+// Aliased as `includes` and `include`.
+
+// Invoke a method (with arguments) on every item in a collection.
+
+// Convenience version of a common use case of `map`: fetching a property.
+
+// Convenience version of a common use case of `filter`: selecting only objects
+
+// containing specific `key:value` pairs.
+
+// Convenience version of a common use case of `find`: getting the first object
+
+// Return the maximum element (or element-based computation).
+
+// Return the minimum element (or element-based computation).
+
+// Shuffle a collection.
+
+// Sample **n** random values from a collection using the modern version of the
+
+// [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher–Yates_shuffle).
+
+// If **n** is not specified, returns a single random element.
+
+// The internal `guard` argument allows it to work with `map`.
+
+// Sort the object's values by a criterion produced by an iteratee.
+
+// An internal function used for aggregate "group by" operations.
+
+// Groups the object's values by a criterion. Pass either a string attribute
+
+// to group by, or a function that returns the criterion.
+
+// Indexes the object's values by a criterion, similar to `groupBy`, but for
+
+// when you know that your index values will be unique.
+
+// Counts instances of an object that group by a certain criterion. Pass
+
+// either a string attribute to count by, or a function that returns the
+
+// criterion.
+
+// Safely create a real, live array from anything iterable.
+
+// Return the number of elements in an object.
+
+// Split a collection into two arrays: one whose elements all satisfy the given
+
+// predicate, and one whose elements all do not satisfy the predicate.
+
+// Array Functions
+
+// ---------------
+
+// Get the first element of an array. Passing **n** will return the first N
+
+// values in the array. Aliased as `head` and `take`. The **guard** check
+
+// allows it to work with `_.map`.
+
+// Returns everything but the last entry of the array. Especially useful on
+
+// the arguments object. Passing **n** will return all the values in
+
+// the array, excluding the last N.
+
+// Get the last element of an array. Passing **n** will return the last N
+
+// values in the array.
+
+// Returns everything but the first entry of the array. Aliased as `tail` and `drop`.
+
+// Especially useful on the arguments object. Passing an **n** will return
+
+// the rest N values in the array.
+
+// Trim out all falsy values from an array.
+
+// Internal implementation of a recursive `flatten` function.
+
+// Flatten current level of array or arguments object.
+
+// Flatten out an array, either recursively (by default), or just one level.
+
+// Return a version of the array that does not contain the specified value(s).
+
+// Produce a duplicate-free version of the array. If the array has already
+
+// been sorted, you have the option of using a faster algorithm.
+
+// The faster algorithm will not work with an iteratee if the iteratee
+
+// is not a one-to-one function, so providing an iteratee will disable
+
+// the faster algorithm.
+
+// Aliased as `unique`.
+
+// Produce an array that contains the union: each distinct element from all of
+
+// the passed-in arrays.
+
+// Produce an array that contains every item shared between all the
+
+// passed-in arrays.
+
+// Take the difference between one array and a number of other arrays.
+
+// Only the elements present in just the first array will remain.
+
+// Complement of _.zip. Unzip accepts an array of arrays and groups
+
+// each array's elements on shared indices.
+
+// Zip together multiple lists into a single array -- elements that share
+
+// an index go together.
+
+// Converts lists into objects. Pass either a single array of `[key, value]`
+
+// pairs, or two parallel arrays of the same length -- one of keys, and one of
+
+// the corresponding values. Passing by pairs is the reverse of _.pairs.
+
+// Generator function to create the findIndex and findLastIndex functions.
+
+// Returns the first index on an array-like that passes a predicate test.
+
+// Use a comparator function to figure out the smallest index at which
+
+// an object should be inserted so as to maintain order. Uses binary search.
+
+// Generator function to create the indexOf and lastIndexOf functions.
+
+// Return the position of the first occurrence of an item in an array,
+
+// or -1 if the item is not included in the array.
+
+// If the array is large and already in sort order, pass `true`
+
+// for **isSorted** to use binary search.
+
+// Generate an integer Array containing an arithmetic progression. A port of
+
+// the native Python `range()` function. See
+
+// [the Python documentation](http://docs.python.org/library/functions.html#range).
+
+// Chunk a single array into multiple arrays, each containing `count` or fewer
+
+// items.
+
+// Function (ahem) Functions
+
+// ------------------
+
+// Determines whether to execute a function as a constructor
+
+// or a normal function with the provided arguments.
+
+// Create a function bound to a given object (assigning `this`, and arguments,
+
+// optionally). Delegates to **ECMAScript 5**'s native `Function.bind` if
+
+// available.
+
+// Partially apply a function by creating a version that has had some of its
+
+// arguments pre-filled, without changing its dynamic `this` context. _ acts
+
+// as a placeholder by default, allowing any combination of arguments to be
+
+// pre-filled. Set `_.partial.placeholder` for a custom placeholder argument.
+
+// Bind a number of an object's methods to that object. Remaining arguments
+
+// are the method names to be bound. Useful for ensuring that all callbacks
+
+// defined on an object belong to it.
+
+// Memoize an expensive function by storing its results.
+
+// Delays a function for the given number of milliseconds, and then calls
+
+// it with the arguments supplied.
+
+// Defers a function, scheduling it to run after the current call stack has
+
+// cleared.
+
+// Returns a function, that, when invoked, will only be triggered at most once
+
+// during a given window of time. Normally, the throttled function will run
+
+// as much as it can, without ever going more than once per `wait` duration;
+
+// but if you'd like to disable the execution on the leading edge, pass
+
+// `{leading: false}`. To disable execution on the trailing edge, ditto.
+
+// Returns a function, that, as long as it continues to be invoked, will not
+
+// be triggered. The function will be called after it stops being called for
+
+// N milliseconds. If `immediate` is passed, trigger the function on the
+
+// leading edge, instead of the trailing.
+
+// Returns the first function passed as an argument to the second,
+
+// allowing you to adjust arguments, run code before and after, and
+
+// conditionally execute the original function.
+
+// Returns a negated version of the passed-in predicate.
+
+// Returns a function that is the composition of a list of functions, each
+
+// consuming the return value of the function that follows.
+
+// Returns a function that will only be executed on and after the Nth call.
+
+// Returns a function that will only be executed up to (but not including) the Nth call.
+
+// Returns a function that will be executed at most one time, no matter how
+
+// often you call it. Useful for lazy initialization.
+
+// Object Functions
+
+// ----------------
+
+// Keys in IE < 9 that won't be iterated by `for key in ...` and thus missed.
+
+// Retrieve the names of an object's own properties.
+
+// Delegates to **ECMAScript 5**'s native `Object.keys`.
+
+// Ahem, IE < 9.
+
+// Retrieve all the property names of an object.
+
+// Retrieve the values of an object's properties.
+
+// Returns the results of applying the iteratee to each element of the object.
+
+// In contrast to _.map it returns an object.
+
+// Convert an object into a list of `[key, value]` pairs.
+
+// The opposite of _.object.
+
+// Invert the keys and values of an object. The values must be serializable.
+
+// Return a sorted list of the function names available on the object.
+
+// Aliased as `methods`.
+
+// An internal function for creating assigner functions.
+
+// Extend a given object with all the properties in passed-in object(s).
+
+// Assigns a given object with all the own properties in the passed-in object(s).
+
+// (https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+
+// Returns the first key on an object that passes a predicate test.
+
+// Internal pick helper function to determine if `obj` has key `key`.
+
+// Return a copy of the object only containing the whitelisted properties.
+
+// Return a copy of the object without the blacklisted properties.
+
+// Fill in a given object with default properties.
+
+// Creates an object that inherits from the given prototype object.
+
+// If additional properties are provided then they will be added to the
+
+// created object.
+
+// Create a (shallow-cloned) duplicate of an object.
+
+// Invokes interceptor with the obj, and then returns obj.
+
+// The primary purpose of this method is to "tap into" a method chain, in
+
+// order to perform operations on intermediate results within the chain.
+
+// Returns whether an object has a given set of `key:value` pairs.
+
+// Identical objects are equal. `0 === -0`, but they aren't identical.
+
+// See the [Harmony `egal` proposal](http://wiki.ecmascript.org/doku.php?id=harmony:egal).
+
+// `null` or `undefined` only equal to itself (strict comparison).
+
+// `NaN`s are equivalent, but non-reflexive.
+
+// Exhaust primitive checks
+
+// Internal recursive comparison function for `isEqual`.
+
+// Unwrap any wrapped objects.
+
+// Compare `[[Class]]` names.
+
+// Strings, numbers, regular expressions, dates, and booleans are compared by value.
+
+// RegExps are coerced to strings for comparison (Note: '' + /a/i === '/a/i')
+
+// Primitives and their corresponding object wrappers are equivalent; thus, `"5"` is
+
+// equivalent to `new String("5")`.
+
+// Object(NaN) is equivalent to NaN.
+
+// An `egal` comparison is performed for other numeric values.
+
+// Coerce dates and booleans to numeric primitive values. Dates are compared by their
+
+// millisecond representations. Note that invalid dates with millisecond representations
+
+// of `NaN` are not equivalent.
+
+// Objects with different constructors are not equivalent, but `Object`s or `Array`s
+
+// from different frames are.
+
+// Assume equality for cyclic structures. The algorithm for detecting cyclic
+
+// structures is adapted from ES 5.1 section 15.12.3, abstract operation `JO`.
+
+// Initializing stack of traversed objects.
+
+// It's done here since we only need them for objects and arrays comparison.
+
+// Linear search. Performance is inversely proportional to the number of
+
+// unique nested structures.
+
+// Add the first object to the stack of traversed objects.
+
+// Recursively compare objects and arrays.
+
+// Compare array lengths to determine if a deep comparison is necessary.
+
+// Deep compare the contents, ignoring non-numeric properties.
+
+// Deep compare objects.
+
+// Ensure that both objects contain the same number of properties before comparing deep equality.
+
+// Deep compare each member
+
+// Remove the first object from the stack of traversed objects.
+
+// Perform a deep comparison to check if two objects are equal.
+
+// Is a given array, string, or object empty?
+
+// An "empty" object has no enumerable own-properties.
+
+// Is a given value a DOM element?
+
+// Is a given value an array?
+
+// Delegates to ECMA5's native Array.isArray
+
+// Is a given variable an object?
+
+// Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp, isError, isMap, isWeakMap, isSet, isWeakSet.
+
+// Define a fallback version of the method in browsers (ahem, IE < 9), where
+
+// there isn't any inspectable "Arguments" type.
+
+// Optimize `isFunction` if appropriate. Work around some typeof bugs in old v8,
+
+// IE 11 (#1621), Safari 8 (#1929), and PhantomJS (#2236).
+
+// Is a given object a finite number?
+
+// Is the given value `NaN`?
+
+// Is a given value a boolean?
+
+// Is a given value equal to null?
+
+// Is a given variable undefined?
+
+// Shortcut function for checking if an object has a given property directly
+
+// on itself (in other words, not on a prototype).
+
+// Utility Functions
+
+// -----------------
+
+// Run Underscore.js in *noConflict* mode, returning the `_` variable to its
+
+// previous owner. Returns a reference to the Underscore object.
+
+// Keep the identity function around for default iteratees.
+
+// Predicate-generating functions. Often useful outside of Underscore.
+
+// Creates a function that, when passed an object, will traverse that object’s
+
+// properties down the given `path`, specified as an array of keys or indexes.
+
+// Generates a function for a given object that returns a given property.
+
+// Returns a predicate for checking whether an object has a given set of
+
+// `key:value` pairs.
+
+// Run a function **n** times.
+
+// Return a random integer between min and max (inclusive).
+
+// A (possibly faster) way to get the current timestamp as an integer.
+
+// List of HTML entities for escaping.
+
+// Regexes for identifying a key that needs to be escaped.
+
+// Traverses the children of `obj` along `path`. If a child is a function, it
+
+// is invoked with its parent as context. Returns the value of the final
+
+// child, or `fallback` if any child is undefined.
+
+// Generate a unique integer id (unique within the entire client session).
+
+// Useful for temporary DOM ids.
+
+// By default, Underscore uses ERB-style template delimiters, change the
+
+// following template settings to use alternative delimiters.
+
+// When customizing `templateSettings`, if you don't want to define an
+
+// interpolation, evaluation or escaping regex, we need one that is
+
+// guaranteed not to match.
+
+// Certain characters need to be escaped so that they can be put into a
+
+// string literal.
+
+// JavaScript micro-templating, similar to John Resig's implementation.
+
+// Underscore templating handles arbitrary delimiters, preserves whitespace,
+
+// and correctly escapes quotes within interpolated code.
+
+// NB: `oldSettings` only exists for backwards compatibility.
+
+// Combine delimiters into one regular expression via alternation.
+
+// Compile the template source, escaping string literals appropriately.
+
+// Adobe VMs need the match returned to produce the correct offset.
+
+// If a variable is not specified, place data values in local scope.
+
+// Provide the compiled source as a convenience for precompilation.
+
+// Add a "chain" function. Start chaining a wrapped Underscore object.
+
+// OOP
+
+// If Underscore is called as a function, it returns a wrapped object that
+
+// can be used OO-style. This wrapper holds altered versions of all the
+
+// underscore functions. Wrapped objects may be chained.
+
+// Helper function to continue chaining intermediate results.
+
+// Add your own custom functions to the Underscore object.
+
+// Add all of the Underscore functions to the wrapper object.
+
+// Add all mutator Array functions to the wrapper.
+
+// Add all accessor Array functions to the wrapper.
+
+// Extracts the result from a wrapped and chained object.
+
+// Provide unwrapping proxy for some methods used in engine operations
+
+// such as arithmetic and JSON stringification.
+
+/* global $:false, Handlebars:false */
+
+/**
+ * Minimal assets to insert
+ */
+
+/**
+ * Initialize uduvudu
+ */
+
+// load, if provided, matchers in JSON
+
+// load, if provided, RDF matcher
+
+/**
+ * Uduvudu edit initialization.
+ */
+
+/**
+ * Main Function of Uduvudu taking an RDF Graph as Input and using the available recipes and serving suggestions to transform to a visualization.
+ * @param {graph} input The input graph as an rdf-interface graph.
+ * @param {object} [options] Options for the rendering.
+ * @param {function} [cb] Callback to use for rendering.
+ * @returns {String} Returns the object as a String.
+ */
+
+//TODO: try to find intelligently start resource if no resource is delivered
+
+/**
+ * The matcher (cook) is looking for known structures of baskets.
+ * @param {store} store The input graph as a rdfStore Object.
+ * @param {resource} The resource this store is about.
+ * @returns {renderables} output a list of objects with all information to get rendered
+ */
+
+// use all functions to see what matches
+
+//delete unmatched ones
+
+//map whole function array
+
+//return the result of the lookup
+
+// sort the proposals by number of elements used
+
+// recursive check for available stuff
+
+// nothing left end condition, handle unknown stuff
+
+// the proposal to use
+
+// remove the used triples
+
+// return the union of all proposals
+
+/*
+ * The visualizer (server) takes the renderables and renders it regarding language and device.
+ * @param {visuals} store The input graph as a rdfStore Object.
+ * @param {language} The language which shall be used for rendering.
+ * @param {device} The device the html shall be rendered for.
+ * @returns {string} outputs the string representing the rendred graph.
+ */
+
+// order visuals
+
+// get the name of template and the context for the current visual
+
+// add templateHelper functions
+
+/**
+ * Helper functions
+ */
+
+//var _ = require('lodash')
+
+// we plan to switch, current problems:
+
+// - .object() ?
+
+// css
+
+/**
+ * Final render step which compiles and renders the template with the context.
+ * @param {String} [templateName] The templateName used to render.
+ * @param {Object} [finalContext] The context structure to render.
+ * @returns {String} Returns the output as a String.
+ */
+
+//check if cached
+
+// get content part of output
+
+// fallback if no template found
+
+// get object
+
+// no subtemplates found
+
+// render text plain
+
+// create scripting part of output
+
+// use underscore to compile templates
+
+// get templates from stylesStore
+
+// fallback look for template in html
+
+// fetch the template of the subcontext provided
+
+// cast to number, if not possible return 0
+
+//replace minus-sign with hyphen-minus
+
+/**
+* Try to find function with the support name in the matchFuncs Array, if not found return empty function.
+* @param {name} String The name of the function.
+* @returns {function} Output the a matcher function.
+*/
+
+// get all literals with proposal structure
+
+// unknown template
+
+// get all unknowns with proposal structure
+
+// put literals together
+
+// put unknowns together
+
+// if isArray nest
+
+// if not, is leafe node do nest object
+
+// else if is leafe node (denoted by having a key of 'l') create key 'u' with current language
+
+// fold duplicated properties into an array
+
+// use factory function to create new matcher
+
+/**
+ * Matcher Factories
+ */
+
+// if no templateVariable is defined get term from predicate
+
+// if linkIds is a value
+
+// look if subject or object position
+
+//add a count to duplicated keys
+
+//for convinience attach to window
