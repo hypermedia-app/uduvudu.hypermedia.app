@@ -29,6 +29,10 @@ class LitUduvudu extends PolymerElement {
             width: 560px;
             margin: 0 auto
         }
+        
+        h1 {
+            @apply --paper-font-display1
+        }
       </style>
       
       <section>
