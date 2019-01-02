@@ -4,6 +4,7 @@
     "build": "webpack",
     "build:prod": "webpack --env.NODE_ENV=production --optimize-minimize",
     "build:stats": "webpack --env production --json > stats.json",
+    "gh-pages": "yarn build:prod; rm -rf docs; mv dist docs",
     "start": "yarn build && http-server dist",
     "dev": "webpack-dev-server --hot --inline"
   },
