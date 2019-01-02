@@ -51,7 +51,7 @@ export default class UduvuduShell extends HydrofoilShellBase {
     const query = 'https://dbpedia.org/sparql?query=' + encodeURIComponent(this.getQuery(source)) + '&format=' + encodeURIComponent('text/turtle')
 
     const graph = await rdfFetch(query, { formats }).then(res => res.dataset())
-    const matchingResult =  await doMatching(graph, source)
+    const matchingResult =  await doMatching(graph, decodeURI(source))
 
     return matchingResult.sort((a, b) => b.order - a.order)
   }
@@ -59,12 +59,12 @@ export default class UduvuduShell extends HydrofoilShellBase {
   getQuery (url) {
     return `CONSTRUCT
             { 
-                <${url}> ?p ?o. 
+                <${decodeURI(url)}> ?p ?o. 
                 ?o <http://www.w3.org/2000/01/rdf-schema#label> ?l
             } 
             WHERE 
             {
-                <${url}> ?p ?o.
+                <${decodeURI(url)}> ?p ?o.
                 OPTIONAL 
                 {
                     ?o <http://www.w3.org/2000/01/rdf-schema#label> ?l.
@@ -89,7 +89,7 @@ export default class UduvuduShell extends HydrofoilShellBase {
 
   renderLoader() {
     return html`<paper-toast vertical-align="top" duration="0" ?opened="${this.isLoading && this.state !== 'error'}" .fitInto="${this}">
-<strong>Loading</strong> ${this.url} is being loaded ...
+<strong>Loading</strong> ${decodeURI(this.url)} is being loaded ...
 </paper-toast>`
   }
 
