@@ -64,7 +64,7 @@ const copyStatics = {
   }],
   copyThirdParty: [{
     from: resolve('node_modules/xtal-chart-istic/chartist.min.*'),
-    to: join(OUTPUT_PATH, 'vendor/xtal-chart-istic/'),
+    to: join(OUTPUT_PATH, 'vendor', 'xtal-chart-istic/'),
     flatten: true
   }]
 };
@@ -103,12 +103,12 @@ const sharedPlugins = [
 ];
 const devPlugins = [
   new CopyWebpackPlugin(
-    [].concat(copyStatics.copyWebcomponents, copyStatics.copyThirdParty )
+    [].concat(copyStatics.copyWebcomponents, copyStatics.copyThirdParty)
   )
 ];
 const buildPlugins = [
   new CopyWebpackPlugin(
-    [].concat(copyStatics.copyWebcomponents, copyStatics.copyOthers)
+    [].concat(copyStatics.copyWebcomponents, copyStatics.copyOthers, copyStatics.copyThirdParty)
   ),
   new CleanWebpackPlugin([OUTPUT_PATH], {verbose: true})
 ];
