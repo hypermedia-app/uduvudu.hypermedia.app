@@ -38,13 +38,17 @@ export default class Search extends PolymerElement {
         overflow: scroll;
         background-color: white;
     }
+    
+    paper-listbox paper-item {
+        cursor: pointer
+    }
 
     #results {
 
     }
 
     #lang {
-
+        flex: 1
     }
 
     #search {
@@ -54,7 +58,7 @@ export default class Search extends PolymerElement {
 
 <paper-input id="search" label="Search DBPedia" placeholder="Try typing a wikipedia name"
              on-value-changed="fetchResults"></paper-input>
-<paper-dropdown-menu id="lang" label="Language" value="{{selectedLanguage}}">
+<paper-dropdown-menu id="lang" label="Language" value="{{selectedLanguage}}" no-animations>
     <paper-listbox slot="dropdown-content">
         <dom-repeat items="[[languages]]">
             <template>
