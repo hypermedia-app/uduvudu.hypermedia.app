@@ -106,64 +106,33 @@ export const website = (website) => html`
   </div>`
 
 export const tempC = (tempC) => {
-  window['xtal_chart_istic'] = {
-    href: '/vendor/xtal-chart-istic/chartist.js'
-  }
-
-  import('xtal-chart-istic/xtal-chart-istic')
-
-  const months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec']
-
-  const getSeries = (data) => {
-    return months.map(month => Number.parseFloat(data[month].u))
-  }
+  import('./monthly-chart')
 
   const chartData = {
-    data: {
-      labels: ['Average Low', 'Daily Mean', 'Average High'],
-      series: [
-        getSeries(tempC.lowC),
-        getSeries(tempC.meanC),
-        getSeries(tempC.highC)
-      ]
-    }
+    'Average Low': tempC.lowC,
+    'Daily Mean': tempC.meanC,
+    'Average High': tempC.highC
   }
 
   return html`
-  <div style="float: left; width:100%">
-    <br>
-    <h3>Temperatures per Month</h3>
-    <xtal-chart-istic draw .lineChart=${chartData}></xtal-chart-istic>
-  </div>`
+  <monthly-chart style="float: left; width:100%"
+    header="Temperatures per Month"
+    .series="${chartData}">
+  </monthly-chart>`
 }
 
 export const humidity = (humi) => {
-  window['xtal_chart_istic'] = {
-    href: '/vendor/xtal-chart-istic/chartist.js'
-  }
-
-  import('xtal-chart-istic/xtal-chart-istic')
-
-  const months = ['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec']
-  const getSeries = (data) => {
-    return months.map(month => Number.parseFloat(data[month].u))
-  }
+  import('./monthly-chart')
 
   const chartData = {
-    data: {
-      labels: ['Humidity in %/month'],
-      series: [
-        getSeries(humi)
-      ]
-    }
+    'Humidity in %/month': humi
   }
 
   return html`
-  <div style="float: left; width:100%">
-    <br>
-    <h3>Humidity per Month</h3>
-    <xtal-chart-istic draw .lineChart=${chartData}></xtal-chart-istic>
-  </div>`
+  <monthly-chart style="float: left; width:100%" 
+    header="Humidity per Month" 
+    .data="${chartData}">
+  </monthly-chart>`
 }
 
 export const location = (location) => {
