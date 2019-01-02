@@ -36,7 +36,7 @@ export default class Search extends PolymerElement {
     paper-listbox {
         max-height: 250px;
         overflow: scroll;
-        background-color: white;
+        width: 100%;
     }
     
     paper-listbox paper-item {
