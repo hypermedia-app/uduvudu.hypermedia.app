@@ -22,7 +22,7 @@ export const combineMatchers = [
 ];
 
 export const linkMatchers = [
-    {matcherName: "neighboringMunicipality", predicate: "http://dbpedia.org/property/neighboringMunicipalities", abstractTemplate: "neighboringMunicipality", templateVariable: "neighboringMunicipality", order: 4000000, linkIds: ['rdfschema_label']},
+    {matcherName: "neighboringMunicipality", predicate: "http://dbpedia.org/ontology/neighboringMunicipality", abstractTemplate: "neighboringMunicipality", templateVariable: "neighboringMunicipality", order: 4000000, linkIds: ['rdfschema_label']},
     {matcherName: "category", predicate: "http://purl.org/dc/terms/subject", abstractTemplate: "category", templateVariable: "category", order: 4000000, linkIds: ['rdfschema_label']},
     {matcherName: "addressPart", predicate: "http://www.w3.org/2000/10/swap/pim/contact#address", templateVariable: "addressLink", abstractTemplate: "address", order: 1000000, linkIds: ['addressPartCombine']},
     {matcherName: "creator", predicate: "http://purl.org/dc/terms/creator", templateVariable: "creator", abstractTemplate: "creator", order: 20000, linkIds: ['rdfschema_label'] },
