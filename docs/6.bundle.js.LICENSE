@@ -1,0 +1,1015 @@
+/***/
+
+// **N3Store** objects store N3 triples by graph in memory.
+
+// ## Constructor
+
+// The number of triples is initially zero
+
+// `_graphs` contains subject, predicate, and object indexes per graph
+
+// `_ids` maps entities such as `http://xmlns.com/foaf/0.1/name` to numbers,
+
+// saving memory by using only numbers as keys in `_graphs`
+
+// dummy entry, so the first actual key is non-zero
+
+// inverse of `_ids`
+
+// `_blankNodeIndex` is the index of the last automatically named blank node
+
+// Shift parameters if `triples` is not given
+
+// Add triples and prefixes if passed
+
+// Determines whether the argument is a string
+
+// ## Exports
+
+// ## Public properties
+
+// ### `size` returns the number of triples in the store
+
+// Return the triple count if if was cached
+
+// Calculate the number of triples by counting to the deepest level
+
+// ## Private methods
+
+// ### `_addToIndex` adds a triple to a three-layered index.
+
+// Returns if the index has changed, if the entry did not already exist.
+
+// Create layers as necessary
+
+// ### `_removeFromIndex` removes a triple from a three-layered index
+
+// Remove the triple from the index
+
+// Remove intermediary index layers if they are empty
+
+// ### `_findInIndex` finds a set of triples in a three-layered index.
+
+// The index base is `index0` and the keys at each level are `key0`, `key1`, and `key2`.
+
+// Any of these keys can be undefined, which is interpreted as a wildcard.
+
+// `name0`, `name1`, and `name2` are the names of the keys at each level,
+
+// used when reconstructing the resulting triple
+
+// (for instance: _subject_, _predicate_, and _object_).
+
+// Finally, `graph` will be the graph of the created triples.
+
+// If `callback` is given, each result is passed through it
+
+// and iteration halts when it returns truthy for any triple.
+
+// If instead `array` is given, each result is added to the array.
+
+// depending on the number of variables, keys or reverse index are faster
+
+// If a key is specified, use only that part of index 0.
+
+// If a key is specified, use only that part of index 1.
+
+// Create triples for all items found in index 2.
+
+// If a key is specified, use only that part of index 2, if it exists.
+
+// ### `_loop` executes the callback on all keys of index 0
+
+// ### `_loopByKey0` executes the callback on all keys of a certain entry in index 0
+
+// ### `_loopByKey1` executes the callback on given keys of all entries in index 0
+
+// ### `_loopBy2Keys` executes the callback on given keys of certain entries in index 2
+
+// ### `_countInIndex` counts matching triples in a three-layered index.
+
+// If a key is specified, count only that part of index 0
+
+// If a key is specified, count only that part of index 1
+
+// If a key is specified, count the triple if it exists
+
+// ### `_getGraphs` returns an array with the given graph,
+
+// or all graphs if the argument is null or undefined.
+
+// ### `_uniqueEntities` returns a function that accepts an entity ID
+
+// and passes the corresponding entity to callback if it hasn't occurred before.
+
+// ## Public methods
+
+// ### `addTriple` adds a new N3 triple to the store.
+
+// Returns if the triple index has changed, if the triple did not already exist.
+
+// Shift arguments if a triple object is given instead of components
+
+// Find the graph that will contain the triple
+
+// Create the graph if it doesn't exist yet
+
+// Freezing a graph helps subsequent `add` performance,
+
+// and properties will never be modified anyway
+
+// Since entities can often be long IRIs, we avoid storing them in every index.
+
+// Instead, we have a separate index that maps entities to numbers,
+
+// which are then used as keys in the other indexes.
+
+// The cached triple count is now invalid
+
+// ### `addTriples` adds multiple N3 triples to the store
+
+// ### `addPrefix` adds support for querying with the given prefix
+
+// ### `addPrefixes` adds support for querying with the given prefixes
+
+// ### `removeTriple` removes an N3 triple from the store if it exists
+
+// Find internal identifiers for all components
+
+// and verify the triple exists.
+
+// Remove it from all indexes
+
+// Remove the graph if it is empty
+
+// ### `removeTriples` removes multiple N3 triples from the store
+
+// ### `getTriples` returns an array of triples matching a pattern, expanding prefixes as necessary.
+
+// Setting any field to `undefined` or `null` indicates a wildcard.
+
+// ### `getTriplesByIRI` returns an array of triples matching a pattern.
+
+// Translate IRIs to internal index keys.
+
+// Only if the specified graph contains triples, there can be results
+
+// Choose the optimal index, based on what fields are present
+
+// If subject and object are given, the object index will be the fastest
+
+// If only subject and possibly predicate are given, the subject index will be the fastest
+
+// If only predicate and possibly object are given, the predicate index will be the fastest
+
+// If only object is given, the object index will be the fastest
+
+// If nothing is given, iterate subjects and predicates first
+
+// ### `countTriples` returns the number of triples matching a pattern, expanding prefixes as necessary.
+
+// ### `countTriplesByIRI` returns the number of triples matching a pattern.
+
+// ### `forEach` executes the callback on all triples.
+
+// ### `forEachByIRI` executes the callback on all triples.
+
+// ### `every` executes the callback on all triples,
+
+// and returns `true` if it returns truthy for all them.
+
+// ### `everyByIRI` executes the callback on all triples,
+
+// ### `some` executes the callback on all triples,
+
+// and returns `true` if it returns truthy for any of them.
+
+// ### `someByIRI` executes the callback on all triples,
+
+// Only if the specified graph contains triples, there can be result
+
+// ### `getSubjects` returns all subjects that match the pattern.
+
+// ### `getSubjectsByIRI` returns all subjects that match the pattern.
+
+// ### `forSubjects` executes the callback on all subjects that match the pattern.
+
+// ### `forSubjectsByIRI` executes the callback on all subjects that match the pattern.
+
+// Choose optimal index based on which fields are wildcards
+
+// If predicate and object are given, the POS index is best.
+
+// If only predicate is given, the SPO index is best.
+
+// If only object is given, the OSP index is best.
+
+// If no params given, iterate all the subjects
+
+// ### `getPredicates` returns all predicates that match the pattern.
+
+// ### `getPredicatesByIRI` returns all predicates that match the pattern.
+
+// ### `forPredicates` executes the callback on all predicates that match the pattern.
+
+// ### `forPredicatesByIRI` executes the callback on all predicates that match the pattern.
+
+// If subject and object are given, the OSP index is best.
+
+// If only subject is given, the SPO index is best.
+
+// If only object is given, the POS index is best.
+
+// If no params given, iterate all the predicates.
+
+// ### `getObjects` returns all objects that match the pattern.
+
+// ### `getObjectsByIRI` returns all objects that match the pattern.
+
+// ### `forObjects` executes the callback on all objects that match the pattern.
+
+// ### `forObjectsByIRI` executes the callback on all objects that match the pattern.
+
+// If subject and predicate are given, the SPO index is best.
+
+// If only subject is given, the OSP index is best.
+
+// If only predicate is given, the POS index is best.
+
+// If no params given, iterate all the objects.
+
+// ### `getGraphs` returns all graphs that match the pattern.
+
+// ### `getGraphsByIRI` returns all graphs that match the pattern.
+
+// ### `forGraphs` executes the callback on all graphs that match the pattern.
+
+// ### `forGraphsByIRI` executes the callback on all graphs that match the pattern.
+
+// Halt iteration of some()
+
+// ### `createBlankNode` creates a new blank node, returning its name
+
+// Generate a name based on the suggested name
+
+// Add the blank node to the entities, avoiding the generation of duplicates
+
+// **N3StreamParser** parses an N3 stream into a triple stream.
+
+// Initialize Transform base class
+
+// Set up parser
+
+// Pass dummy stream to obtain `data` and `end` callbacks
+
+// Handle triples by pushing them down the pipeline
+
+// Emit prefixes through the `prefix` event
+
+// Implement Transform methods through parser callbacks
+
+/* WEBPACK VAR INJECTION */
+
+// Copyright Joyent, Inc. and other Node contributors.
+
+//
+
+// Permission is hereby granted, free of charge, to any person obtaining a
+
+// copy of this software and associated documentation files (the
+
+// "Software"), to deal in the Software without restriction, including
+
+// without limitation the rights to use, copy, modify, merge, publish,
+
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+
+// persons to whom the Software is furnished to do so, subject to the
+
+// following conditions:
+
+// The above copyright notice and this permission notice shall be included
+
+// in all copies or substantial portions of the Software.
+
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// Mark that a method should not be used.
+
+// Returns a modified function which warns once by default.
+
+// If --no-deprecation is set, then it is a no-op.
+
+// Allow for deprecating things in the process of starting up.
+
+/**
+ * Echos the value of a value. Trys to print the value out
+ * in the best way possible given the different types.
+ *
+ * @param {Object} obj The object to print out.
+ * @param {Object} opts Optional options object that alters the output.
+ */
+
+/* legacy: obj, showHidden, depth, colors*/
+
+// default options
+
+// legacy...
+
+// got an "options" object
+
+// set default options
+
+// Provide a hook for user-specified inspect functions.
+
+// Check that value is an object with an inspect function on it
+
+// Filter out the util module, it's inspect function is special
+
+// Primitive types cannot have properties
+
+// For some reason typeof null is "object", so special case here.
+
+// Look up the keys of the object.
+
+// IE doesn't make error fields non-enumerable
+
+// http://msdn.microsoft.com/en-us/library/ie/dww52sbt(v=vs.94).aspx
+
+// Some type of object without properties can be shortcutted.
+
+// Make Array say that they are Array
+
+// Make functions say that they are functions
+
+// Make RegExps say that they are RegExps
+
+// Make dates with properties first say the date
+
+// Make error with message first say the error
+
+// NOTE: These type checking functions intentionally don't use `instanceof`
+
+// because it is fragile and can be easily faked with `Object.create()`.
+
+// http://en.wikipedia.org/wiki/ANSI_escape_code#graphics
+
+// Don't use 'blue' not visible on cmd.exe
+
+// "name": intentionally not styling
+
+// ES6 symbol
+
+// 26 Feb 16:19:34
+
+// log is just a thin wrapper to console.log that prepends a timestamp
+
+/**
+ * Inherit the prototype methods from one constructor into another.
+ *
+ * The Function.prototype.inherits from lang.js rewritten as a standalone
+ * function (not on Function.prototype). NOTE: If this file is to be loaded
+ * during bootstrapping this function needs to be rewritten using some native
+ * functions as prototype setup using normal JavaScript does not work as
+ * expected during bootstrapping (see mirror.js in r114903).
+ *
+ * @param {function} ctor Constructor function which needs to inherit the
+ *     prototype.
+ * @param {function} superCtor Constructor function to inherit prototype from.
+ */
+
+// Don't do anything if add isn't an object
+
+// **N3StreamWriter** serializes a triple stream into an N3 stream.
+
+// Set up writer with a dummy stream object
+
+// Implement Transform methods on top of writer
+
+// Expose submodules
+
+// Load submodules on first access
+
+// **N3Lexer** tokenizes N3 documents.
+
+// In line mode (N-Triples or N-Quads), only simple features may be parsed
+
+// Don't tokenize special literals
+
+// Swap the tokenize method for a restricted version
+
+// Enable N3 functionality by default
+
+// Disable comment tokens by default
+
+// ## Regular expressions
+
+// It's slightly faster to have these as properties than as in-scope variables
+
+// IRI with escape sequences; needs sanity check after unescaping
+
+// IRI without escape sequences; no unescaping
+
+// non-empty string without escape sequences
+
+// ### `_tokenizeToEnd` tokenizes as for as possible, emitting tokens through the callback
+
+// Continue parsing as far as possible; the loop will return eventually
+
+// Count and skip whitespace lines
+
+// Try to find a comment
+
+// Advance the input
+
+// Skip whitespace on current line
+
+// Stop for now if we're at the end
+
+// If the input is finished, emit EOF
+
+// Try to find a final comment
+
+// Look for specific token types based on the first character
+
+// We need at least 3 tokens lookahead to distinguish ^^<IRI> and ^^pre:fixed
+
+// Try to match a type
+
+// Fall through in case the type is an IRI
+
+// Move to type IRI or prefixed name
+
+// Try to find a full IRI without escape sequences
+
+// Try to find a full IRI with escape sequences
+
+// Try to find a backwards implication arrow
+
+// Try to find a blank node. Since it can contain (but not end with) a dot,
+
+// we always need a non-dot character before deciding it is a blank node.
+
+// Therefore, try inserting a space if we're at the end of the input.
+
+// Try to find a non-empty double-quoted literal without escape sequences
+
+// Try to find any other literal wrapped in a pair of single or double quotes
+
+// Try to find a literal wrapped in three pairs of single or double quotes
+
+// Count the newlines and advance line counter
+
+// Try to find a variable
+
+// Try to find a language code
+
+// Try to find a dot as punctuation
+
+// Fall through to numerical case (could be a decimal dot)
+
+// Try to find a number. Since it can contain (but not end with) a dot,
+
+// we always need a non-dot character before deciding it is a number.
+
+// Try to find a SPARQL-style keyword
+
+// Try to match a boolean
+
+// Try to find an abbreviated predicate
+
+// Try to find an implication arrow or equals sign
+
+// The next token is punctuation
+
+// Some first characters do not allow an immediate decision, so inspect more
+
+// A type token is special: it can only be emitted after an IRI or prefixed name is read
+
+// Try to find a prefix
+
+// What if nothing of the above was found?
+
+// We could be in streaming mode, and then we just wait for more input to arrive.
+
+// Otherwise, a syntax error has occurred in the input.
+
+// One exception: error on an unaccounted linebreak (= not inside a triple-quoted literal).
+
+// Emit the parsed token
+
+// Advance to next part to tokenize
+
+// Signals the syntax error through the callback
+
+// ### `_unescape` replaces N3 escape codes by their corresponding characters
+
+// can never happen (regex), but helps performance
+
+// ### `_syntaxError` creates a syntax error for the given issue
+
+// ### `tokenize` starts the transformation of an N3 document into an array of tokens.
+
+// The input can be a string or a stream.
+
+// If the input is a string, continuously emit tokens through the callback until the end
+
+// If a callback was passed, asynchronously call it
+
+// Otherwise, the input must be a stream
+
+// Adds the data chunk to the buffer and parses as far as possible
+
+// Parses until the end
+
+// **N3Parser** parses N3 documents.
+
+// Set the document IRI
+
+// Set supported features depending on the format
+
+// Disable relative IRIs in N-Triples or N-Quads mode
+
+// Disable explicit quantifiers by default
+
+// ## Private class methods
+
+// ### `_resetBlankNodeIds` restarts blank node identification
+
+// The empty function
+
+// ### `_setBase` sets the base IRI to resolve relative IRIs
+
+// Remove fragment if present
+
+// Set base IRI and its components
+
+// ### `_saveContext` stores the current parsing context
+
+// when entering a new scope (list, blank node, formula)
+
+// The settings below only apply to N3 streams
+
+// Every new scope resets the predicate direction
+
+// In N3, blank nodes are scoped to a formula
+
+// (using a dot as separator, as a blank node label cannot start with it)
+
+// Quantifiers are scoped to a formula
+
+// ### `_restoreContext` restores the parent context
+
+// when leaving a scope (list, blank node, formula)
+
+// ### `_readInTopContext` reads a token when in the top context
+
+// If an EOF token arrives in the top context, signal that we're done
+
+// It could be a prefix declaration
+
+// It could be a base declaration
+
+// It could be a graph
+
+// Otherwise, the next token must be a subject
+
+// ### `_readEntity` reads an IRI, prefixed name, blank node, or variable
+
+// Read a relative or absolute IRI
+
+// Read a blank node or prefixed name
+
+// Read a variable
+
+// Everything else is not an entity
+
+// In N3 mode, replace the entity if it is quantified
+
+// ### `_readSubject` reads a triple's subject
+
+// Start a new triple with a new blank node as subject
+
+// Start a new list
+
+// Start a new formula
+
+// No subject; the graph in which we are reading is closed instead
+
+// Read the subject entity
+
+// In N3 mode, the subject might be a path
+
+// The next token must be a predicate,
+
+// or, if the subject was actually a graph IRI, a named graph
+
+// ### `_readPredicate` reads a triple's predicate
+
+// Expected predicate didn't come, must have been trailing semicolon
+
+// Additional semicolons can be safely ignored
+
+// The next token must be an object
+
+// ### `_readObject` reads a triple's object
+
+// Read the object entity
+
+// In N3 mode, the object might be a path
+
+// ### `_readPredicateOrNamedGraph` reads a triple's predicate, or a named graph
+
+// ### `_readGraph` reads a graph
+
+// The "subject" we read is actually the GRAPH's label
+
+// ### `_readBlankNodeHead` reads the head of a blank node
+
+// ### `_readBlankNodeTail` reads the end of a blank node
+
+// Store blank node triple
+
+// Restore the parent context containing this blank node
+
+// If the blank node was the subject, continue reading the predicate
+
+// ### `_readPredicateAfterBlank` reads a predicate after an anonymous blank node
+
+// If a dot follows a blank node in top context, there is no predicate
+
+// ### `_readListItem` reads items from a list
+
+// The item of the list
+
+// The list itself
+
+// The previous list that contains this list
+
+// The stack of parent contexts
+
+// The parent containing the current list
+
+// The next function to execute
+
+// Whether the item has been read fully
+
+// Stack the current list triple and start a new triple with a blank node as subject
+
+// Stack the current list triple and start a new list
+
+// Was this list the parent's subject?
+
+// Closing the list; restore the parent context
+
+// If this list is contained within a parent list, return the membership triple here.
+
+// This will be `<parent list element> rdf:first <this list>.`.
+
+// No list tail if this was an empty list
+
+// The next token is the predicate
+
+// Close the list by making the head nil
+
+// Can still have a datatype or language
+
+// Create a new blank node if no item head was assigned yet
+
+// Add the item's value
+
+// Is this the first element of the list?
+
+// This list is either the subject or the object of its parent
+
+// Continue the previous list with the current list
+
+// In N3 mode, the item might be a path
+
+// _readPath will restore the context and output the item
+
+// Create a new context to add the item's path
+
+// Output the item if it is complete
+
+// ### `_readDataTypeOrLang` reads an _optional_ data type or language
+
+// ### `_readListItemDataTypeOrLang` reads an _optional_ data type or language in a list
+
+// ### `_completeLiteral` completes the object with a data type or language
+
+// Add a "^^type" suffix for types (IRIs and blank nodes)
+
+// No datatype means an error was reported, so abort
+
+// Add an "@lang" suffix for language tags
+
+// If this literal was part of a list, write the item
+
+// (we could also check the context stack, but passing in a flag is faster)
+
+// Continue with the rest of the input
+
+// ### `_readFormulaTail` reads the end of a formula
+
+// Store the last triple of the formula
+
+// Restore the parent context containing this formula
+
+// ### `_readPunctuation` reads punctuation between triples or triple parts
+
+// A closing brace ends a graph
+
+// A dot just ends the statement, without sharing anything with the next
+
+// Semicolon means the subject is shared; predicate and object are different
+
+// Comma means both the subject and predicate are shared; the object is different
+
+// An entity means this is a quad (only allowed if not already inside a graph)
+
+// A triple has been completed now, so return it
+
+// ### `_readBlankNodePunctuation` reads punctuation in a blank node
+
+// ### `_readQuadPunctuation` reads punctuation after a quad
+
+// ### `_readPrefix` reads the prefix of a prefix declaration
+
+// ### `_readPrefixIRI` reads the IRI of a prefix declaration
+
+// ### `_readBaseIRI` reads the IRI of a base declaration
+
+// ### `_readNamedGraphLabel` reads the label of a named graph
+
+// ### `_readNamedGraphLabel` reads a blank node label of a named graph
+
+// ### `_readDeclarationPunctuation` reads the punctuation of a declaration
+
+// SPARQL-style declarations don't have punctuation
+
+// Reads a list of quantified symbols from a @forSome or @forAll statement
+
+// Without explicit quantifiers, map entities to a quantified entity
+
+// If this is the first item, start a new quantifier list
+
+// Output the list item
+
+// Reads punctuation from a @forSome or @forAll statement
+
+// Read more quantifiers
+
+// With explicit quantifiers, close the quantifier list
+
+// Read a dot
+
+// ### `_getPathReader` reads a potential path and then resumes with the given function
+
+// ### `_readPath` reads a potential path
+
+// Forward path
+
+// Backward path
+
+// Not a path; resume reading where we left off
+
+// If we were reading a list item, we still need to output it
+
+// The list item is the remaining subejct after reading the path
+
+// Switch back to the context of the list
+
+// ### `_readForwardPath` reads a '!' path
+
+// If we were reading a subject, replace the subject by the path's object
+
+// Emit the path's current triple and read its next section
+
+// ### `_readBackwardPath` reads a '^' path
+
+// If we were reading a subject, replace the subject by the path's subject
+
+// ### `_getContextEndReader` gets the next reader function at the end of a context
+
+// ### `_triple` emits a triple through the callback
+
+// ### `_error` emits an error message through the callback
+
+// ### `_resolveIRI` resolves a relative IRI token against the base path,
+
+// assuming that a base path has been set and that the IRI is indeed relative
+
+// An empty relative IRI indicates the base IRI
+
+// Resolve relative fragment IRIs against the base IRI
+
+// Resolve relative query string IRIs by replacing the query string
+
+// Resolve root-relative IRIs at the root of the base IRI
+
+// Resolve scheme-relative IRIs to the scheme
+
+// Resolve all other IRIs at the base IRI's path
+
+// ### `_removeDotSegments` resolves './' and '../' path segments in an IRI as per RFC3986
+
+// Don't modify the IRI if it does not contain any dot segments
+
+// Start with an imaginary slash before the IRI in order to resolve trailing './' and '../'
+
+// The path starts with the first slash after the authority
+
+// Skip to slash after the authority
+
+// Don't modify a query string or fragment
+
+// Handle '/.' or '/..' path segments
+
+// Remove a '/.' segment
+
+// Remove a trailing '/.' segment
+
+// Remove a '/..' segment
+
+// Remove a trailing '/..' segment
+
+// Try to remove the parent path from result
+
+// ### `parse` parses the N3 input and emits each parsed triple through the callback
+
+// The read callback is the next function to be executed when a token arrives.
+
+// We start reading in the top context.
+
+// Parse synchronously if no triple callback is given
+
+// Parse asynchronously otherwise, executing the read callback when a token arrives
+
+// **N3Util** provides N3 utility functions.
+
+// Tests whether the given entity (triple object) represents an IRI in the N3 library
+
+// Tests whether the given entity (triple object) represents a literal in the N3 library
+
+// Tests whether the given entity (triple object) represents a blank node in the N3 library
+
+// Tests whether the given entity represents the default graph
+
+// Tests whether the given triple is in the default graph
+
+// Gets the string value of a literal in the N3 library
+
+// Gets the type of a literal in the N3 library
+
+// Gets the language of a literal in the N3 library
+
+// Tests whether the given entity (triple object) represents a prefixed name
+
+// Expands the prefixed name to a full IRI (also when it occurs as a literal's type)
+
+// The match index is non-zero when expanding a literal's type
+
+// Creates an IRI in N3.js representation
+
+// Creates a literal in N3.js representation
+
+// Creates a function that prepends the given IRI to a local name
+
+// Creates a function that allows registering and expanding prefixes
+
+// Add all of the default prefixes
+
+// Registers a new prefix (if an IRI was specified)
+
+// or retrieves a function that expands an existing prefix (if no IRI was specified)
+
+// Create a new prefix if an IRI is specified or the prefix doesn't exist
+
+// Create a function that expands the prefix
+
+// **N3Writer** writes N3 documents.
+
+// Matches a literal as represented in memory by the N3 library
+
+// rdf:type predicate (for 'a' abbreviation)
+
+// Shift arguments if the first argument is not a stream
+
+// If no output stream given, send the output as string through the end callback
+
+// Initialize writer, depending on the format
+
+// Replaces a character by its escaped version
+
+// Replace a single character by its escaped version
+
+// Replace a single character with its 4-bit unicode escape sequence
+
+// ### `_write` writes the argument to the output stream
+
+// ### `_writeTriple` writes the triple to the output stream
+
+// Write the graph's label if it has changed
+
+// Close the previous graph and start the new one
+
+// Don't treat identical blank nodes as repeating graphs
+
+// Don't repeat the subject if it's the same
+
+// Don't repeat the predicate if it's the same
+
+// ### `_writeTripleLine` writes the triple or quad to the output stream as a single line
+
+// Write the triple without prefixes
+
+// ### `tripleToString` serializes a triple or quad as a string
+
+// ### `triplesToString` serializes an array of triples or quads as a string
+
+// ### `_encodeIriOrBlankNode` represents an IRI or blank node
+
+// A blank node or list is represented as-is
+
+// Escape special characters
+
+// Try to represent the IRI as prefixed name
+
+// ### `_encodeLiteral` represents a literal
+
+// Write the literal, possibly with type or language
+
+// ### `_encodeSubject` represents a subject
+
+// Don't treat identical blank nodes as repeating subjects
+
+// ### `_encodePredicate` represents a predicate
+
+// ### `_encodeObject` represents an object
+
+// Represent an IRI or blank node
+
+// Represent a literal
+
+// ### `_blockedWrite` replaces `_write` after the writer has been closed
+
+// ### `addTriple` adds the triple to the output stream
+
+// The triple was given as a triple object, so shift parameters
+
+// ### `addTriples` adds the triples to the output stream
+
+// ### `addPrefix` adds the prefix to the output stream
+
+// ### `addPrefixes` adds the prefixes to the output stream
+
+// Add all useful prefixes
+
+// Verify whether the prefix can be used and does not exist yet
+
+// Finish a possible pending triple
+
+// Write prefix
+
+// Recreate the prefix matcher
+
+// End a prefix block with a newline
+
+// ### `blank` creates a blank node with the given content
+
+// Empty blank node
+
+// Generate an empty blank node
+
+// Generate a non-nested one-triple blank node
+
+// Generate a multi-triple or nested blank node
+
+// Write all triples in order
+
+// Write only the object is the predicate is the same as the previous
+
+// ### `list` creates a list node with the given content
+
+// ### `_prefixRegex` matches a prefixed name or IRI that begins with one of the added prefixes
+
+// ### `end` signals the end of the output stream
+
+// Disallow further writing
+
+// Try to end the underlying stream, ensuring done is called exactly one time
+
+/* error closing stream */

@@ -1,0 +1,1215 @@
+/***/
+
+// base64 is 4/3 + up to two characters of the original data
+
+// must be multiple of 3
+
+// go through the array every three bytes, we'll deal with trailing stuff later
+
+// pad the end with zeros, but make sure to not forget the extra bytes
+
+// Support decoding URL-safe base64 strings, as Node.js does.
+
+// See: https://en.wikipedia.org/wiki/Base64#URL_applications
+
+// Trim off extra bytes after placeholder bytes are found
+
+// See: https://github.com/beatgammit/base64-js/issues/42
+
+/* WEBPACK VAR INJECTION */
+
+// Spec says greater than zero
+
+// Don't get fooled by e.g. browserify environments.
+
+// The test against `importScripts` prevents this implementation from being installed inside a web worker,
+
+// where `global.postMessage` means something completely different and can't be used for this purpose.
+
+// For web workers, where supported
+
+// For IE 6–8
+
+// Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
+
+// into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
+
+// For non-IE10 modern browsers
+
+// Callback can either be a function or a string
+
+// Copy function arguments
+
+// Store and register the task
+
+// From the spec: "Wait until any invocations of this algorithm started before this one have completed."
+
+// So if we're currently running a task, we'll need to delay this invocation.
+
+// Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
+
+// "too much recursion" error.
+
+/**
+ * Checks `localStorage` for boolean values for the given `name`.
+ *
+ * @param {String} name
+ * @returns {Boolean}
+ * @api private
+ */
+
+// accessing global.localStorage can trigger a DOMException in sandboxed iframes
+
+/**
+ * Module exports.
+ */
+
+/**
+ * Mark that a method should not be used.
+ * Returns a modified function which warns once by default.
+ *
+ * If `localStorage.noDeprecation = true` is set, then it is a no-op.
+ *
+ * If `localStorage.throwDeprecation = true` is set, then deprecated functions
+ * will throw an Error when invoked.
+ *
+ * If `localStorage.traceDeprecation = true` is set, then deprecated functions
+ * will invoke `console.trace()` instead of `console.error()`.
+ *
+ * @param {Function} fn - the function to deprecate
+ * @param {String} msg - the string to print to the console when `fn` is invoked
+ * @returns {Function} a new "deprecated" version of `fn`
+ * @api public
+ */
+
+// Copyright Joyent, Inc. and other Node contributors.
+
+//
+
+// Permission is hereby granted, free of charge, to any person obtaining a
+
+// copy of this software and associated documentation files (the
+
+// "Software"), to deal in the Software without restriction, including
+
+// without limitation the rights to use, copy, modify, merge, publish,
+
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+
+// persons to whom the Software is furnished to do so, subject to the
+
+// following conditions:
+
+// The above copyright notice and this permission notice shall be included
+
+// in all copies or substantial portions of the Software.
+
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// a passthrough stream.
+
+// basically just the most minimal sort of Transform stream.
+
+// Every written chunk gets output as-is.
+
+/*<replacement>*/
+
+/*</replacement>*/
+
+// implementation from standard node.js 'util' module
+
+// old school shim for old browsers
+
+/* eslint-disable node/no-deprecated-api */
+
+// alternative to using Object.keys for old browsers
+
+// Copy static methods from Buffer
+
+// Copy properties from require('buffer')
+
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @license  MIT
+ */
+
+/* eslint-disable no-proto */
+
+// Return an augmented `Uint8Array` instance, for best performance
+
+// Fallback: Return an object instance of the Buffer class
+
+/**
+ * The Buffer constructor returns instances of `Uint8Array` that have their
+ * prototype changed to `Buffer.prototype`. Furthermore, `Buffer` is a subclass of
+ * `Uint8Array`, so the returned instances will have all the node `Buffer` methods
+ * and the `Uint8Array` methods. Square bracket notation works as expected -- it
+ * returns a single octet.
+ *
+ * The `Uint8Array` prototype remains unmodified.
+ */
+
+// Common case.
+
+// this throws if `array` is not a valid ArrayBuffer
+
+// Writing a hex string, for example, that contains invalid characters will
+
+// cause everything after the first invalid character to be ignored. (e.g.
+
+// 'abxxcd' will be treated as 'ab')
+
+/**
+ * Functionally equivalent to Buffer(arg, encoding) but throws a TypeError
+ * if value is a number.
+ * Buffer.from(str[, encoding])
+ * Buffer.from(array)
+ * Buffer.from(buffer)
+ * Buffer.from(arrayBuffer[, byteOffset[, length]])
+ **/
+
+/**
+ * Equivalent to Buffer(num), by default creates a non-zero-filled Buffer instance.
+ * */
+
+// Note: cannot use `length < kMaxLength()` here because that fails when
+
+// length is NaN (which is otherwise coerced to zero.)
+
+// Use a for loop to avoid recursion
+
+// assume utf8
+
+// Finds either the first index of `val` in `buffer` at offset >= `byteOffset`,
+
+// OR the last index of `val` in `buffer` at offset <= `byteOffset`.
+
+// Arguments:
+
+// - buffer - a Buffer to search
+
+// - val - a string, Buffer, or number
+
+// - byteOffset - an index into `buffer`; will be clamped to an int32
+
+// - encoding - an optional encoding, relevant is val is a string
+
+// - dir - true for indexOf, false for lastIndexOf
+
+// Empty buffer means no match
+
+// Normalize byteOffset
+
+// Coerce to Number.
+
+// byteOffset: it it's undefined, null, NaN, "foo", etc, search whole buffer
+
+// Normalize byteOffset: negative offsets start from the end of the buffer
+
+// Normalize val
+
+// Finally, search either indexOf (if dir is true) or lastIndexOf
+
+// Special case: looking for empty string/buffer always fails
+
+// Search for a byte value [0-255]
+
+// must be an even number of digits
+
+// Node's code seems to be doing this and not & 0x7F..
+
+// we did not generate a valid codePoint so insert a
+
+// replacement char (U+FFFD) and advance only 1 byte
+
+// encode to utf16 (surrogate pair dance)
+
+// avoid extra slice()
+
+// Decode in chunks to avoid "call stack size exceeded".
+
+// Based on http://stackoverflow.com/a/22747272/680742, the browser with
+
+// the lowest limit is Chrome, with 0x10000 args.
+
+// We go 1 magnitude less, for safety
+
+// eslint-disable-line eqeqeq
+
+/**
+ * If `Buffer.TYPED_ARRAY_SUPPORT`:
+ *   === true    Use Uint8Array implementation (fastest)
+ *   === false   Use Object implementation (most compatible, even IE6)
+ *
+ * Browsers that support typed arrays are IE 10+, Firefox 4+, Chrome 7+, Safari 5.1+,
+ * Opera 11.6+, iOS 4.2+.
+ *
+ * Due to various browser bugs, sometimes the Object implementation will be used even
+ * when the browser supports typed arrays.
+ *
+ * Note:
+ *
+ *   - Firefox 4-29 lacks support for adding new properties to `Uint8Array` instances,
+ *     See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438.
+ *
+ *   - Chrome 9-10 is missing the `TypedArray.prototype.subarray` function.
+ *
+ *   - IE10 has a broken `TypedArray.prototype.subarray` function which returns arrays of
+ *     incorrect length in some situations.
+
+ * We detect these buggy browsers and set `Buffer.TYPED_ARRAY_SUPPORT` to `false` so they
+ * get the Object implementation, which is slower but behaves correctly.
+ */
+
+// typed array instances can be augmented
+
+// chrome 9-10 lack `subarray`
+
+// ie10 has broken `subarray`
+
+/*
+ * Export kMaxLength after typed array support is determined.
+ */
+
+// not used by this implementation
+
+// TODO: Legacy, not needed anymore. Remove in next major version.
+
+// Fix subarray() in ES2016. See: https://github.com/feross/buffer/pull/97
+
+/**
+ * Creates a new filled Buffer instance.
+ * alloc(size[, fill[, encoding]])
+ **/
+
+/**
+ * Equivalent to SlowBuffer(num), by default creates a non-zero-filled Buffer instance.
+ */
+
+// The property is used by `Buffer.isBuffer` and `is-buffer` (in Safari 5-7) to detect
+
+// Buffer instances.
+
+// No need to verify that "this.length <= MAX_UINT32" since it's a read-only
+
+// property of a typed array.
+
+// This behaves neither like String nor Uint8Array in that we set start/end
+
+// to their upper/lower bounds if the value passed is out of range.
+
+// undefined is handled specially as per ECMA-262 6th Edition,
+
+// Section 13.3.3.7 Runtime Semantics: KeyedBindingInitialization.
+
+// Return early if start > this.length. Done here to prevent potential uint32
+
+// coercion fail below.
+
+// Force coersion to uint32. This will also coerce falsey/NaN values to 0.
+
+// Buffer#write(string)
+
+// Warning: maxLength not taken into account in base64Write
+
+/*
+ * Need to make sure that buffer isn't trying to write out of bounds.
+ */
+
+// copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
+
+// Copy 0 bytes; we're done
+
+// Fatal error conditions
+
+// Are we oob?
+
+// descending copy from end
+
+// ascending copy from start
+
+// Usage:
+
+//    buffer.fill(number[, offset[, end]])
+
+//    buffer.fill(buffer[, offset[, end]])
+
+//    buffer.fill(string[, offset[, end]][, encoding])
+
+// Handle string cases:
+
+// Invalid ranges are not set to a default, so can range check early.
+
+// HELPER FUNCTIONS
+
+// ================
+
+// is surrogate component
+
+// last char was a lead
+
+// no lead yet
+
+// unexpected trail
+
+// valid lead
+
+// unpaired lead
+
+// 2 leads in a row
+
+// valid surrogate pair
+
+// encode utf8
+
+// Node converts strings with length < 2 to ''
+
+// Node strips out invalid characters like \n and \t from the string, base64-js does not
+
+// Node allows for non-padded base64 strings (missing trailing ===), base64-js does not
+
+// This works in non-strict mode
+
+// This works if eval is allowed (see CSP)
+
+// This works if the window reference is available
+
+// g can still be undefined, but nothing to do about it...
+
+// We return undefined, instead of nothing here, so it's
+
+// easier to handle this case. if(!global) { ...}
+
+// shim for using process in browser
+
+// cached from whatever global is present so that test runners that stub it
+
+// don't break things.  But we need to wrap it in a try catch in case it is
+
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+
+// function because try/catches deoptimize in certain engines.
+
+//normal enviroments in sane situations
+
+// if setTimeout wasn't available but was latter defined
+
+// when when somebody has screwed with setTimeout but no I.E. maddness
+
+// When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+
+// same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+
+// if clearTimeout wasn't available but was latter defined
+
+// When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+
+// same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+
+// Some versions of I.E. have different rules for clearTimeout vs setTimeout
+
+// v8 likes predictible objects
+
+// empty string to avoid regexp issues
+
+// a duplex stream is just a stream that is both readable and writable.
+
+// Since JS doesn't have multiple prototypal inheritance, this class
+
+// prototypally inherits from Readable, and then parasitically from
+
+// Writable.
+
+// avoid scope creep, the keys array can then be collected
+
+// the no-half-open enforcer
+
+// if we allow half-open state, or if the writable side ended,
+
+// then we're ok.
+
+// no more data can be written.
+
+// But allow more writes to happen in this tick.
+
+// making it explicit this property is not enumerable
+
+// because otherwise some prototype manipulation in
+
+// userland will fail
+
+// we ignore the value if the stream
+
+// has not been initialized yet
+
+// backward compatibility, the user is explicitly
+
+// managing destroyed
+
+// NOTE: These type checking functions intentionally don't use `instanceof`
+
+// because it is fragile and can be easily faked with `Object.create()`.
+
+// ES6 symbol
+
+// old-style streams.  Note that the pipe method (the only relevant
+
+// part of this class) is overridden in the Readable class.
+
+// Backwards-compat with node 0.4.x
+
+// If the 'end' option is not supplied, dest.end() will be called when
+
+// source gets the 'end' or 'close' events.  Only dest.end() once.
+
+// don't leave dangling pipes when there are errors.
+
+// Unhandled stream error in pipe.
+
+// remove all the event listeners that were added.
+
+// Allow for unix-like usage: A.pipe(B).pipe(C)
+
+// Backwards-compat with node 0.10.x
+
+// By default EventEmitters will print a warning if more than 10 listeners are
+
+// added to it. This is a useful default which helps finding memory leaks.
+
+// Obviously not all Emitters should be limited to 10. This function allows
+
+// that to be increased. Set to zero for unlimited.
+
+// If there is no 'error' event listener then throw.
+
+// Unhandled 'error' event
+
+// At least give some kind of context to the user
+
+// fast cases
+
+// slower
+
+// To avoid recursion in the case that type === "newListener"! Before
+
+// adding it to the listeners, first emit "newListener".
+
+// If we've already got an array, just append.
+
+// Adding the second element, need to change to array.
+
+// Optimize the case of one listener. Don't need the extra array object.
+
+// Check for listener leak
+
+// not supported in IE 10
+
+// emits a 'removeListener' event iff the listener was removed
+
+// not listening for removeListener, no need to emit
+
+// emit removeListener for all listeners on all events
+
+// LIFO order
+
+// A bit simpler than readable streams.
+
+// Implement an async ._write(chunk, encoding, cb), and it'll handle all
+
+// the drain event emission and buffering.
+
+// It seems a linked list but it is not
+
+// there will be only 2 of these for each stream
+
+/* </replacement> */
+
+// Duplex streams are both readable and writable, but share
+
+// the same options object.
+
+// However, some cases require setting options to different
+
+// values for the readable and the writable sides of the duplex stream.
+
+// These options can be provided separately as readableXXX and writableXXX.
+
+// object stream flag to indicate whether or not this stream
+
+// contains buffers or objects.
+
+// the point at which write() starts returning false
+
+// Note: 0 is a valid value, means that we always return false if
+
+// the entire buffer is not flushed immediately on write()
+
+// cast to ints.
+
+// if _final has been called
+
+// drain event flag.
+
+// at the start of calling end()
+
+// when end() has been called, and returned
+
+// when 'finish' is emitted
+
+// has it been destroyed
+
+// should we decode strings into buffers before passing to _write?
+
+// this is here so that some node-core streams can optimize string
+
+// handling at a lower level.
+
+// Crypto is kind of old and crusty.  Historically, its default string
+
+// encoding is 'binary' so we have to make this configurable.
+
+// Everything else in the universe uses 'utf8', though.
+
+// not an actual buffer we keep track of, but a measurement
+
+// of how much we're waiting to get pushed to some underlying
+
+// socket or file.
+
+// a flag to see when we're in the middle of a write.
+
+// when true all writes will be buffered until .uncork() call
+
+// a flag to be able to tell if the onwrite cb is called immediately,
+
+// or on a later tick.  We set this to true at first, because any
+
+// actions that shouldn't happen until "later" should generally also
+
+// not happen before the first write call.
+
+// a flag to know if we're processing previously buffered items, which
+
+// may call the _write() callback in the same tick, so that we don't
+
+// end up in an overlapped onwrite situation.
+
+// the callback that's passed to _write(chunk,cb)
+
+// defer the callback if we are being called synchronously
+
+// to avoid piling up things on the stack
+
+// this can emit finish, and it will always happen
+
+// after error
+
+// the caller expect this to happen before if
+
+// it is async
+
+// this can emit finish, but finish must
+
+// always follow error
+
+// Check if we're actually ready to finish, but don't emit yet
+
+// the callback that the user supplies to write(chunk,encoding,cb)
+
+// the amount that is being written when _write is called.
+
+// number of pending user-supplied write callbacks
+
+// this must be 0 before 'finish' can be emitted
+
+// emit prefinish if the only thing we're waiting for is _write cbs
+
+// This is relevant for synchronous Transform streams
+
+// True if the error was already emitted and should not be thrown again
+
+// count buffered requests
+
+// allocate the first CorkedRequest, there is always
+
+// one allocated and free to use, and we maintain at most two
+
+// Writable ctor is applied to Duplexes, too.
+
+// `realHasInstance` is necessary because using plain `instanceof`
+
+// would return false, as no `_writableState` property is attached.
+
+// Trying to use the custom `instanceof` for Writable here will also break the
+
+// Node.js LazyTransform implementation, which has a non-trivial getter for
+
+// `_writableState` that would lead to infinite recursion.
+
+// legacy.
+
+// Otherwise people can pipe Writable streams, which is just wrong.
+
+// Must force callback to be called on nextTick, so that we don't
+
+// emit 'drain' before the write() consumer gets the 'false' return
+
+// value, and has a chance to attach a 'drain' listener.
+
+// if there's something in the buffer waiting, then process it
+
+// Fast case, write everything using _writev()
+
+// doWrite is almost always async, defer these to save a bit of time
+
+// as the hot path ends with doWrite
+
+// Slow case, write chunks one-by-one
+
+// if we didn't call the onwrite immediately, then
+
+// it means that we need to wait until it does.
+
+// also, that means that the chunk and cb are currently
+
+// being processed, so move the buffer counter past them.
+
+// TODO: defer error events consistently everywhere, not just the cb
+
+// Checks that a user-supplied chunk is valid, especially for the particular
+
+// mode the stream is in. Currently this means that `null` is never accepted
+
+// and undefined/non-string values are only allowed in object mode.
+
+// if we're already writing something, then just put this
+
+// in the queue, and wait our turn.  Otherwise, call _write
+
+// If we return false, then we need a drain event, so set that flag.
+
+// we must ensure that previous needDrain will not be reset to false.
+
+// node::ParseEncoding() requires lower case.
+
+// .end() fully uncorks
+
+// ignore unnecessary end() calls.
+
+// Do not cache `Buffer.isEncoding` when checking encoding names as some
+
+// modules monkey-patch it to support additional encodings
+
+// undefined
+
+// StringDecoder provides an interface for efficiently splitting a series of
+
+// buffers into a series of JS strings without breaking apart multi-byte
+
+// characters.
+
+// Checks the type of a UTF-8 byte, whether it's ASCII, a leading byte, or a
+
+// continuation byte. If an invalid byte is detected, -2 is returned.
+
+// Checks at most 3 bytes at the end of a Buffer in order to detect an
+
+// incomplete multi-byte UTF-8 character. The total number of bytes (2, 3, or 4)
+
+// needed to complete the UTF-8 character (if applicable) are returned.
+
+// Attempts to complete a multi-byte UTF-8 character using bytes from a Buffer.
+
+// Validates as many continuation bytes for a multi-byte UTF-8 character as
+
+// needed or are available. If we see a non-continuation byte where we expect
+
+// one, we "replace" the validated continuation bytes we've seen so far with
+
+// a single UTF-8 replacement character ('\ufffd'), to match v8's UTF-8 decoding
+
+// behavior. The continuation byte check is included three times in the case
+
+// where all of the continuation bytes for a character exist in the same buffer.
+
+// It is also done this way as a slight performance increase instead of using a
+
+// loop.
+
+// Returns all complete UTF-8 characters in a Buffer. If the Buffer ended on a
+
+// partial character, the character's bytes are buffered until the required
+
+// number of bytes are available.
+
+// UTF-16LE typically needs two bytes per character, but even if we have an even
+
+// number of bytes available, we need to check if we end on a leading/high
+
+// surrogate. In that case, we need to wait for the next two bytes in order to
+
+// decode the last character properly.
+
+// For UTF-16LE we do not explicitly append special replacement characters if we
+
+// end on a partial character, we simply let v8 handle that.
+
+// Pass bytes on through for single-byte encodings (e.g. ascii, latin1, hex)
+
+// For UTF-8, a replacement character is added when ending on a partial
+
+// character.
+
+// Returns only complete characters in a Buffer
+
+// Attempts to complete a partial non-UTF-8 character using bytes from a Buffer
+
+// object stream flag. Used to make read(n) ignore n and to
+
+// make all the buffer merging and length checks go away
+
+// the point at which it stops calling _read() to fill the buffer
+
+// Note: 0 is a valid value, means "don't call _read preemptively ever"
+
+// A linked list is used to store data chunks instead of an array because the
+
+// linked list can remove elements from the beginning faster than
+
+// array.shift()
+
+// a flag to be able to tell if the event 'readable'/'data' is emitted
+
+// immediately, or on a later tick.  We set this to true at first, because
+
+// any actions that shouldn't happen until "later" should generally also
+
+// not happen before the first read call.
+
+// whenever we return null, then we set a flag to say
+
+// that we're awaiting a 'readable' event emission.
+
+// the number of writers that are awaiting a drain event in .pipe()s
+
+// if true, a maybeReadMore has been scheduled
+
+// legacy
+
+// emit 'readable' now to make sure it gets picked up.
+
+// Don't emit readable right away in sync mode, because this can trigger
+
+// another read() call => stack overflow.  This way, it might trigger
+
+// a nextTick recursion warning, but that's not so bad.
+
+// if it's past the high water mark, we can push in some more.
+
+// Also, if we have no data yet, we can stand some
+
+// more bytes.  This is to work around cases where hwm=0,
+
+// such as the repl.  Also, if the push() triggered a
+
+// readable event, and the user called read(largeNumber) such that
+
+// needReadable was set, then we ought to push more, so that another
+
+// 'readable' event will be triggered.
+
+// update the buffer info.
+
+// Manually shove something into the read() buffer.
+
+// This returns true if the highWaterMark has not been hit yet,
+
+// similar to how Writable.write() returns true if you should
+
+// write() some more.
+
+// Unshift should *always* be something directly out of read()
+
+// backwards compatibility.
+
+// Don't raise the hwm > 8MB
+
+// This function is designed to be inlinable, so please take care when making
+
+// changes to the function body.
+
+// Only flow one buffer at a time
+
+// If we're asking for more than the current hwm, then raise the hwm.
+
+// Get the next highest power of 2 to prevent increasing hwm excessively in
+
+// tiny amounts
+
+// Don't have enough
+
+// you can override either this method, or the async _read(n) below.
+
+// at this point, the user has presumably seen the 'readable' event,
+
+// and called read() to consume some data.  that may have triggered
+
+// in turn another _read(n) call, in which case reading = true if
+
+// it's in progress.
+
+// However, if we're not ended, or reading, and the length < hwm,
+
+// then go ahead and try to read some more preemptively.
+
+// abstract method.  to be overridden in specific implementation classes.
+
+// call cb(er, data) where data is <= n in length.
+
+// for virtual (non-string, non-buffer) streams, "length" is somewhat
+
+// arbitrary, and perhaps not very meaningful.
+
+// pause() and resume() are remnants of the legacy readable stream API
+
+// If the user uses them, then switch into old mode.
+
+// wrap an old-style stream as the async data source.
+
+// This is *not* part of the readable stream interface.
+
+// It is an ugly unfortunate mess of history.
+
+// Pluck off n bytes from an array of buffers.
+
+// Length is the combined lengths of all the buffers in the list.
+
+// nothing buffered
+
+// read it all, truncate the list
+
+// read part of list
+
+// Extracts only enough buffered data to satisfy the amount requested.
+
+// slice is the same for buffers and strings
+
+// first chunk is a perfect match
+
+// Copies a specified amount of characters from the list of buffered data
+
+// chunks.
+
+// Copies a specified amount of bytes from the list of buffered data chunks.
+
+// If we get here before consuming all the bytes, then that is a
+
+// bug in node.  Should never happen.
+
+// Check that we didn't get one last unshift.
+
+// if we're doing read(0) to trigger a readable event, but we
+
+// already have a bunch of data in the buffer, then just trigger
+
+// the 'readable' event and move on.
+
+// if we've ended, and we're now clear, then finish it up.
+
+// All the actual chunk generation logic needs to be
+
+// *below* the call to _read.  The reason is that in certain
+
+// synthetic stream cases, such as passthrough streams, _read
+
+// may be a completely synchronous operation which may change
+
+// the state of the read buffer, providing enough data when
+
+// before there was *not* enough.
+
+// So, the steps are:
+
+// 1. Figure out what the state of things will be after we do
+
+// a read from the buffer.
+
+// 2. If that resulting state will trigger a _read, then call _read.
+
+// Note that this may be asynchronous, or synchronous.  Yes, it is
+
+// deeply ugly to write APIs this way, but that still doesn't mean
+
+// that the Readable class should behave improperly, as streams are
+
+// designed to be sync/async agnostic.
+
+// Take note if the _read call is sync or async (ie, if the read call
+
+// has returned yet), so that we know whether or not it's safe to emit
+
+// 'readable' etc.
+
+// 3. Actually pull the requested chunks out of the buffer and return.
+
+// if we need a readable event, then we need to do some reading.
+
+// if we currently have less than the highWaterMark, then also read some
+
+// however, if we've ended, then there's no point, and if we're already
+
+// reading, then it's unnecessary.
+
+// if the length is currently zero, then we *need* a readable event.
+
+// call internal read method
+
+// If _read pushed data synchronously, then `reading` will be false,
+
+// and we need to re-evaluate how much data we can return to the user.
+
+// If we have nothing in the buffer, then we want to know
+
+// as soon as we *do* get something into the buffer.
+
+// If we tried to read() past the EOF, then emit end on the next tick.
+
+// cleanup event handlers once the pipe is broken
+
+// if the reader is waiting for a drain event from this
+
+// specific writer, then it would cause it to never start
+
+// flowing again.
+
+// So, if this is awaiting a drain, then we just call it now.
+
+// If we don't know, then assume that we are waiting for one.
+
+// when the dest drains, it reduces the awaitDrain counter
+
+// on the source.  This would be more elegant with a .once()
+
+// handler in flow(), but adding and removing repeatedly is
+
+// too slow.
+
+// If the user pushes more data while we're writing to dest then we'll end up
+
+// in ondata again. However, we only want to increase awaitDrain once because
+
+// dest will only emit one 'drain' event for the multiple writes.
+
+// => Introduce a guard on increasing awaitDrain.
+
+// If the user unpiped during `dest.write()`, it is possible
+
+// to get stuck in a permanently paused state if that write
+
+// also returned false.
+
+// => Check whether `dest` is still a piping destination.
+
+// if the dest has an error, then stop piping into it.
+
+// however, don't suppress the throwing behavior for this.
+
+// Make sure our error handler is attached before userland ones.
+
+// Both close and finish should trigger unpipe, but only once.
+
+// tell the dest that it's being piped to
+
+// Sadly this is not cacheable as some libraries bundle their own
+
+// event emitter implementation with them.
+
+// This is a hack to make sure that our error handler is attached before any
+
+// userland ones.  NEVER DO THIS. This is here only because this code needs
+
+// to continue to work with older versions of Node.js that do not include
+
+// the prependListener() method. The goal is to eventually remove this hack.
+
+// start the flow if it hasn't been started already.
+
+// if we're not piping anywhere, then do nothing.
+
+// just one destination.  most common case.
+
+// passed in one, but it's not the right one.
+
+// got a match.
+
+// slow case. multiple pipe destinations.
+
+// remove all.
+
+// try to find the right one.
+
+// set up data events if they are asked for
+
+// Ensure readable listeners eventually get something
+
+// Start flowing on next tick if stream isn't explicitly paused
+
+// proxy all the other methods.
+
+// important when wrapping filters and duplexes.
+
+// don't skip over falsy values in objectMode
+
+// proxy certain important events.
+
+// when we try to consume some more bytes, simply unpause the
+
+// underlying stream.
+
+// exposed for testing purposes only.
+
+// undocumented cb() API, needed for core, not for public API
+
+// we set destroyed to true before firing error callbacks in order
+
+// to make it re-entrance safe in case destroy() is called within callbacks
+
+// if this is a duplex stream mark the writable part as destroyed as well
+
+// DOM APIs, for completeness
+
+// Does not start the time, just sets up the members needed.
+
+// setimmediate attaches itself to the global object
+
+// On some exotic environments, it's not clear which object `setimmediate` was
+
+// able to install onto.  Search each possibility in the same order as the
+
+// `setimmediate` library.
+
+// a transform stream is a readable/writable stream where you do
+
+// something with the data.  Sometimes it's called a "filter",
+
+// but that's not a great name for it, since that implies a thing where
+
+// some bits pass through, and others are simply ignored.  (That would
+
+// be a valid example of a transform, of course.)
+
+// While the output is causally related to the input, it's not a
+
+// necessarily symmetric or synchronous transformation.  For example,
+
+// a zlib stream might take multiple plain-text writes(), and then
+
+// emit a single compressed chunk some time in the future.
+
+// Here's how this works:
+
+// The Transform stream has all the aspects of the readable and writable
+
+// stream classes.  When you write(chunk), that calls _write(chunk,cb)
+
+// internally, and returns false if there's a lot of pending writes
+
+// buffered up.  When you call read(), that calls _read(n) until
+
+// there's enough pending readable data buffered up.
+
+// In a transform stream, the written data is placed in a buffer.  When
+
+// _read(n) is called, it transforms the queued up data, calling the
+
+// buffered _write cb's as it consumes chunks.  If consuming a single
+
+// written chunk would result in multiple output chunks, then the first
+
+// outputted bit calls the readcb, and subsequent chunks just go into
+
+// the read buffer, and will cause it to emit 'readable' if necessary.
+
+// This way, back-pressure is actually determined by the reading side,
+
+// since _read has to be called to start processing a new chunk.  However,
+
+// a pathological inflate type of transform can cause excessive buffering
+
+// here.  For example, imagine a stream where every byte of input is
+
+// interpreted as an integer from 0-255, and then results in that many
+
+// bytes of output.  Writing the 4 bytes {ff,ff,ff,ff} would result in
+
+// 1kb of data being output.  In this case, you could write a very small
+
+// amount of input, and end up with a very large amount of output.  In
+
+// such a pathological inflating mechanism, there'd be no way to tell
+
+// the system to stop doing the transform.  A single 4MB write could
+
+// cause the system to run out of memory.
+
+// However, even in such a pathological case, only a single written chunk
+
+// would be consumed, and then the rest would wait (un-transformed) until
+
+// the results of the previous transformed chunk were consumed.
+
+// single equals check for both `null` and `undefined`
+
+// start out asking for a readable event once data is transformed.
+
+// we have implemented the _read method, and done the other things
+
+// that Readable wants before the first _read call, so unset the
+
+// sync guard flag.
+
+// When the writable side finishes, then flush out anything remaining.
+
+// if there's nothing in the write buffer, then that means
+
+// that nothing more will ever be provided
+
+// This is the part where you do stuff!
+
+// override this function in implementation classes.
+
+// 'chunk' is an input chunk.
+
+// Call `push(newChunk)` to pass along transformed output
+
+// to the readable side.  You may call 'push' zero or more times.
+
+// Call `cb(err)` when you are done with this chunk.  If you pass
+
+// an error, then that'll put the hurt on the whole operation.  If you
+
+// never call cb(), then you'll never get another chunk.
+
+// Doesn't matter what the args are here.
+
+// _transform does all the work.
+
+// That we got here means that the readable side wants more data.
+
+// mark that we need a transform, so that any data that comes in
+
+// will get processed, now that we've asked for it.

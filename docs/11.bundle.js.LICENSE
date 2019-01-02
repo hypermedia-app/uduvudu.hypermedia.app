@@ -1,0 +1,17 @@
+/***/
+
+// Reject the promise after a timeout
+
+// Set the on load callback to a no-op
+
+// Hook up the on load callback
+
+// Prepare the `script` tag to be inserted into the page
+
+// Insert the `script` tag
+
+/* harmony export (binding) */
+
+/* harmony import */
+
+/*#__PURE__*/
