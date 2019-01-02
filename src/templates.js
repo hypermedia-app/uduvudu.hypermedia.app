@@ -105,14 +105,8 @@ export const website = (website) => html`
     <p><i class="glyphicon glyphicon-link"></i> <a href="${website.u}">${website.u}</a></p>
   </div>`
 
-export const tempC = (tempC) => {
+const tempGraph = (chartData) => {
   import('./monthly-chart')
-
-  const chartData = {
-    'Average Low': tempC.lowC,
-    'Daily Mean': tempC.meanC,
-    'Average High': tempC.highC
-  }
 
   return html`
   <monthly-chart style="float: left; width:100%"
@@ -121,7 +115,33 @@ export const tempC = (tempC) => {
   </monthly-chart>`
 }
 
-export const humidity = (humi) => {
+export const temp = (tempC) => {
+  return tempGraph({
+    'Average Low': tempC.lowC,
+    'Daily Mean': tempC.meanC,
+    'Average High': tempC.highC
+  })
+}
+
+export const highC = (highC) => {
+  return tempGraph({
+    'Average High': highC
+  })
+}
+
+export const lowC = (lowC) => {
+  return tempGraph({
+    'Average Low': lowC
+  })
+}
+
+export const meanC = (meanC) => {
+  return tempGraph({
+    'Daily Mean': meanC
+  })
+}
+
+export const humi = (humi) => {
   import('./monthly-chart')
 
   const chartData = {
@@ -131,7 +151,7 @@ export const humidity = (humi) => {
   return html`
   <monthly-chart style="float: left; width:100%" 
     header="Humidity per Month" 
-    .data="${chartData}">
+    .series="${chartData}">
   </monthly-chart>`
 }
 

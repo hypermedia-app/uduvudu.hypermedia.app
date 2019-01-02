@@ -3,7 +3,8 @@ import 'xtal-chart-istic/xtal-chart-istic'
 
 const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
 const getSeries = (data) => {
-  return months.map(month => Number.parseFloat(data[month].u))
+  return months.map(month => {
+    return Number.parseFloat(data[month].u.replace(String.fromCharCode(8722), '-'))})
 }
 
 export default class MonthlyChart extends LitElement {
