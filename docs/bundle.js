@@ -231,10 +231,10 @@ Revision: <a href="http://en.wikipedia.org/?curid=${t.wikiPageID.u}&oldid=${t.wi
 ${e(t.label_comment)}
   </div>
   </script>`,D=(t,e)=>o.f`${e(t.title)}
-       ${e(t.text)}`,$=t=>o.f`
- ${template(t.website)}
- ${template(t.elevation)}
- ${template(t.area)}`,U=t=>o.f`<div style="float: left; min-width: 200px;">
+       ${e(t.text)}`,$=(t,e)=>o.f`
+ ${e(t.website)}
+ ${e(t.elevation)}
+ ${e(t.area)}`,U=t=>o.f`<div style="float: left; min-width: 200px;">
          <p><i class="glyphicon glyphicon-stats"></i> Elevation: ${t.u} m</p>
        </div>`,q=t=>o.f`<div style="float: left; min-width: 200px;">
          <p><i class="glyphicon glyphicon-stats"></i> Area: ${num(t.u)} km<sup>2</sup></p>
