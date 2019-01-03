@@ -84,7 +84,7 @@ export const label_comment = (label_comment, template) =>
   html`${template(label_comment.title)}
        ${template(label_comment.text)}`
 
-export const community_stat = (community_stat) => html`
+export const community_stat = (community_stat, template) => html`
  ${template(community_stat.website)}
  ${template(community_stat.elevation)}
  ${template(community_stat.area)}`
